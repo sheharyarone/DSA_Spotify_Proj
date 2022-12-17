@@ -4,7 +4,7 @@ using namespace std;
 class doublyNode
 {
 public:
-    int data;
+     T data;
     doublyNode *next;
     doublyNode *previous;
 };
@@ -28,7 +28,7 @@ public:
     {
         return start == nullptr;
     }
-    void insertAtFront(int val)
+    void insertAtFront( T val)
     {
         doublyNode *nn = new doublyNode();
         nn->data = val;
@@ -47,7 +47,7 @@ public:
             start = nn;
         }
     }
-    void insertAtEnd(int val)
+    void insertAtEnd( T val)
     {
         doublyNode *nn = new doublyNode();
         nn->data = val;
@@ -66,7 +66,7 @@ public:
             last = nn;
         }
     }
-    void printList()
+    void pr TList()
     {
         doublyNode *temp = start;
         if (!(isEmpty()))
@@ -78,7 +78,7 @@ public:
             }
         }
     }
-    void searchValue(int val)
+    void searchValue( T val)
     {
         loc = start;
         ploc = nullptr;
@@ -92,7 +92,7 @@ public:
             loc = nullptr;
         }
     }
-    void insertSorted(int val)
+    void insertSorted( T val)
     {
         searchValue(val);
         if (loc == nullptr)
@@ -140,7 +140,7 @@ public:
             delete temp;
         }
     }
-    void deleteValue(int val)
+    void deleteValue( T val)
     {
         if (isEmpty())
         {

@@ -1,18 +1,19 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
-class Node
+template <class T>
+class circluarNode
 {
 public:
-    int data;
-    Node *next;
+    T data;
+    circluarNode *next;
 };
+template <class T>
 class CLL
 {
-    Node *list;
-    Node *loc;
-    Node *ploc;
+    circluarNode *list;
+    circluarNode *loc;
+    circluarNode *ploc;
     CLL()
     {
         list = NULL;
@@ -23,9 +24,9 @@ class CLL
     {
         return list == NULL;
     }
-    void insertAtFront(int data)
+    void insertAtFront(T data)
     {
-        Node *newnode = new Node();
+        circluarNode *newnode = new circluarNode();
         newnode->data = data;
         // NOT EMPTY CASE
         if (!isEmpty())
@@ -40,9 +41,9 @@ class CLL
             list->next = newnode;
         }
     }
-    void insertAtTail(int data)
+    void insertAtTail(T data)
     {
-        Node *newnode = new Node();
+        circluarNode *newnode = new circluarNode();
         newnode->data = data;
         // NOT EMPTY CASE
         if (!isEmpty())
@@ -58,10 +59,10 @@ class CLL
             list->next = newnode;
         }
     }
-    void printList()
+    void pr TList()
     {
         // NOT EMPTY CASE
-        Node *p = list->next;
+        circluarNode *p = list->next;
         if (!isEmpty())
         {
             while (p != list->next)
@@ -75,7 +76,7 @@ class CLL
             cout << 'LIST IS EMPTY' << endl;
         }
     }
-    void Search(int value)
+    void Search(T value)
     {
 
         loc, ploc = NULL;
@@ -100,7 +101,7 @@ class CLL
             loc = NULL;
         }
     }
-    void insertedSorted(int data)
+    void insertedSorted(T data)
     {
         Search(data);
         if (loc != NULL)
@@ -109,7 +110,7 @@ class CLL
         }
         else
         {
-            Node *newnode = new Node();
+            circluarNode *newnode = new circluarNode();
             newnode->data = data;
             if (isEmpty())
             {
@@ -128,7 +129,7 @@ class CLL
             }
         }
     }
-    void Delete(int data)
+    void Delete(T data)
     {
         Search(data);
         if (loc != NULL)
@@ -146,7 +147,7 @@ class CLL
             }
             else
             {
-                Node *temp = list;
+                circluarNode *temp = list;
                 delete temp;
                 list = NULL;
             }
@@ -161,7 +162,7 @@ class CLL
 
         if (!isEmpty())
         {
-            Node *temp;
+            circluarNode *temp;
             while (list != list->next)
             {
                 temp = list->next;
