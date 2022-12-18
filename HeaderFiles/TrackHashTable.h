@@ -1,3 +1,5 @@
+#ifndef TRACKHASHTABLEHEADER
+#define TRACKHASHTABLEHEADER
 #include <iostream>
 #include <string>
 #include "Track.h";
@@ -7,14 +9,13 @@ using namespace std;
 // IF TRACK IS FOUND THEN IT WILL ADD THE GENRE / PLAYLIST (WHICH WILL BE IMPLEMENTED LATER ON) USING TRACK.H
 // IF TRACK IS NOT FOUND THEN IT WILL CALL TRACK.h FILE
 
-
-class trackHashTable
+class TrackHashTable
 {
 public:
     int tablesize;
     Track *trackarray;
 
-    trackHashTable()
+    TrackHashTable()
     {
         // WE WILL FIX THE SIZE BASED ON OUR DATA
         // cout << "Enter the size of song hash table: ";
@@ -22,7 +23,7 @@ public:
         // trackarray = new Track[tablesize];
     }
 
-    ~trackHashTable()
+    ~TrackHashTable()
     {
         for (int i = 0; i < tablesize; i++)
         {
@@ -48,3 +49,4 @@ public:
         trackarray[key] = *s;
     }
 };
+#endif // TRACKHASHTABLEHEADER

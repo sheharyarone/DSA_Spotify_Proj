@@ -10,32 +10,51 @@ using namespace std;
 // ARTIST HASH TABLE WILL CALL THIS FILE AND WILL MAKE AN ARTIST OBJECT
 // IF FOUND
 // ARTIST HASH TABLE WILL CALL THIS FOR ADDING THE TRACK TO THAT ARTIST NAME
-
-class ListingArtistSongs
+class ArtistSong
 {
 public:
     Track *TrackInfo;
-    ListingArtistSongs *NextTrack;
-    ListingArtistSongs(Track *toBeSave)
+    ArtistSong *NextArtistTrack;
+    ArtistSong(Track *toBeSave)
     {
         TrackInfo = toBeSave;
-        NextTrack = NULL;
+        NextArtistTrack = NULL;
+    }
+};
+class ListingArtistSongs
+{
+public:
+    ArtistSong *HeadTrack;
+    ArtistSong *NxtToBeSaved;
+    ListingArtistSongs(Track *toBeSave)
+    {
+        HeadTrack = new ArtistSong(toBeSave);
+        NxtToBeSaved = NULL;
     }
     void addTrack(Track *toBeSave)
     {
-        if (TrackCheck(toBeSave))
+        if (!TrackCheck(toBeSave))
         {
-            return;
-        };
-        // LOGIC FOR ADDING
-        // WHILE HEADTRACK WILL REMAIN SAME
+            // NxtToBeSaved WILL BE ON THAT ARTISTNODE NXT TO WHICH SONG NEEDS TO BE ADDED
+            NxtToBeSaved->NextArtistTrack = new ArtistSong(toBeSave);
+        }
+        NxtToBeSaved = NULL;
     }
     bool TrackCheck(Track *toBeSave)
     {
-        // CHECK FOR DUPLICATION CUZ SONGS ARE IN DIFFERENT PLAYLISTS
-        // IF FOUND THEN TRUE
+        NxtToBeSaved = HeadTrack;
+        while (NxtToBeSaved->NextArtistTrack != NULL)
+        {
+            // CHECK FOR DUPLICATION CUZ SONGS ARE IN DIFFERENT PLAYLISTS
+            if (toBeSave->Title == NxtToBeSaved->TrackInfo->Title)
+            {
+                // IF FOUND THEN TRUE
+
+                return true;
+            }
+        }
         // FALSE ELSEWISE
-        return true;
+        return false;
     }
 };
 
@@ -43,12 +62,12 @@ class Artist
 {
 public:
     string name;
-    ListingArtistSongs *HeadTrack;
+    ListingArtistSongs *SongsList;
     // FROM NXT NODE WE WILL SEE ALL THE TRACKS
     Artist(string name)
     {
         this->name = name;
-        HeadTrack = NULL;
+        SongsList = NULL;
     }
 };
 #endif // ARTISTHEADER
