@@ -1,18 +1,32 @@
+#ifndef TRACKHEADER
+#define TRACKHEADER
+
 #include <iostream>
 #include <string>
-#include "./Template/singlyLinkList.h";
+#include "Artist.h"
 using namespace std;
 
 // THIS FILE WILL BE CALLED IF TRACK IS BEING ADDED FOR THE VERY FIRST TIME
 // OR IF TRACK IS ALREADY IN TRACK HASH TABLE THEN GENRE/ PLAYLIST WILL BE THE REQUIRED THING
 
+class ArtistsForTrack
+{
+public:
+    Artist *ArtistName;
+    ArtistsForTrack *NextArtist;
+    ArtistsForTrack()
+    {
+        //
+    }
+};
+
 class Track
 {
 public:
     string Title;
-    singlyNode<string> *Artists;
-    singlyNode<string> *Genre;
-    singlyNode<string> *Playlist;
+    ArtistsForTrack *Artists;
+    // singlyNode<string> *Genre;
+    // singlyNode<string> *Playlist;
     int Duration;
     bool Explicit;
     float Dancebility;
@@ -32,8 +46,8 @@ public:
     {
         Title = array[4];
         Artists = NULL;
-        Genre = NULL;
-        Playlist = NULL;
+        // Genre = NULL;
+        // Playlist = NULL;
         Duration = stoi(array[6]);
         Explicit = stoi(array[7]);
         Dancebility = stof(array[8]);
@@ -50,3 +64,5 @@ public:
         TimeSignature = stoi(array[19]);
     }
 };
+
+#endif // TRACKHEADER
