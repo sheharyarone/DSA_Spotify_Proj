@@ -50,7 +50,7 @@ public:
 
     void insetAtHead(T val)
     {
-        singlyNode<T> *newnode<T> = new singlyNode(val);
+        singlyNode<T> *newnode = new singlyNode(val);
         if (isempty())
         {
             head = newnode;
@@ -65,7 +65,7 @@ public:
 
     void insertAtTail(T val)
     {
-        singlyNode<T> *newnode<T> = new singlyNode(val);
+        singlyNode<T> *newnode = new singlyNode(val);
         if (isempty())
         {
             head = newnode;
@@ -90,7 +90,7 @@ public:
         }
         else
         {
-            singlyNode<T> *newnode<T> = new singlyNode(val);
+            singlyNode<T> *newnode = new singlyNode(val);
             singlyNode<T> *temp = head;
             for (T i = 0; i < idx - 1; i++)
             {
