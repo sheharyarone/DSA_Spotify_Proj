@@ -13,24 +13,31 @@ class TrackHashTable
 {
 public:
     int tablesize;
-    Track *trackarray;
+    Track **trackarray;
 
     TrackHashTable()
     {
-        // WE WILL FIX THE SIZE BASED ON OUR DATA
-        // cout << "Enter the size of song hash table: ";
-        // cin >> tablesize;
-        // trackarray = new Track[tablesize];
+        tablesize = 100000;
+        trackarray = new Track *[tablesize];
     }
 
     ~TrackHashTable()
     {
         for (int i = 0; i < tablesize; i++)
         {
-            Track *temp = &trackarray[i];
+            Track *temp = trackarray[i];
             delete temp;
         }
         delete[] trackarray;
+    }
+    bool isAvailable(int ExistOn)
+    {
+        // IF ARRAY CONTAINS POINTER = TRUE
+        // IN THE ABOVE CASE THIS FUNCTION WILL RETURN FALSE BECAUSE SPACE IS NOT FREE
+
+        // IF ARRAY DOESN'T CONTAINS POINTER = FALSE
+        // IN THE ABOVE CASE THIS FUNCTION WILL RETURN TRUE BECAUSE SPACE IS FREE
+        return (!(trackarray[ExistOn]));
     }
 
     int hashFunction(string s)
@@ -40,13 +47,20 @@ public:
         {
             sum += (int)s[i];
         }
-        return sum % tablesize;
+        // SUM TO BE MULTIPLIED BY PRIME NUMBER
+        return (sum % tablesize);
     }
 
     void hashStore(Track *s)
     {
         int key = hashFunction(s->Title);
-        trackarray[key] = *s;
+        if (isAvailable(key))
+        {
+            trackarray[key] = s;
+        }
+    }
+    void handler(string arr[])
+    {
     }
 };
 #endif // TRACKHASHTABLEHEADER

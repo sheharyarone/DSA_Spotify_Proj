@@ -3,28 +3,28 @@
 
 #include <iostream>
 #include <string>
-#include "Artist.h"
+// #include "Artist.h"
 using namespace std;
 
 // THIS FILE WILL BE CALLED IF TRACK IS BEING ADDED FOR THE VERY FIRST TIME
 // OR IF TRACK IS ALREADY IN TRACK HASH TABLE THEN GENRE/ PLAYLIST WILL BE THE REQUIRED THING
 
-class ArtistsForTrack
-{
-public:
-    Artist *ArtistName;
-    ArtistsForTrack *NextArtist;
-    ArtistsForTrack()
-    {
-        //
-    }
-};
+// class ArtistsForTrack
+// {
+// public:
+//     Artist *ArtistName;
+//     ArtistsForTrack *NextArtist;
+//     ArtistsForTrack()
+//     {
+//         //
+//     }
+// };
 
 class Track
 {
 public:
     string Title;
-    ArtistsForTrack *Artists;
+    // ArtistsForTrack *Artists;
     // singlyNode<string> *Genre;
     // singlyNode<string> *Playlist;
     int Duration;
@@ -42,10 +42,29 @@ public:
     float Tempo;
     int TimeSignature;
 
+    Track()
+    {
+        Title = "";
+        Duration = 0;
+        Explicit = 0;
+        Dancebility = 0;
+        Energy = 0;
+        key = 0;
+        Loudness = 0;
+        Mode = 0;
+        Speechiness = 0;
+        Accousticness = 0;
+        Instrumental = 0;
+        Liveness = 0;
+        Valence = 0;
+        Tempo = 0;
+        TimeSignature = 0;
+    }
+
     Track(string *array)
     {
         Title = array[4];
-        Artists = NULL;
+        // Artists = NULL;
         // Genre = NULL;
         // Playlist = NULL;
         Duration = stoi(array[6]);
