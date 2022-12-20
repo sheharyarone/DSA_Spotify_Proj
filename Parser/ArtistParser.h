@@ -2,24 +2,88 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "../HeaderFiles/ArtistHashTable.h"
 using namespace std;
 
-void parseArtistCSV(const string filename)
+bool AreThereManyArtists(string s)
+{
+    // TRUE IF SEMI COLON IS PRESENT
+    // FALSE OTHERWISE
+    return (s.find(';') != string::npos);
+}
+
+int countArtists(string s)
+{
+    int count = 1;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == ';')
+        {
+            count++;
+        }
+    }
+    return count;
+}
+string *SeperatingArtist(string s, int noOfArtist)
+{
+    string *ArtistArr = new string[noOfArtist];
+
+    string word;
+    int counter = 0;
+    for (char c : s)
+    {
+        if (c == ';')
+        {
+            ArtistArr[counter] = word;
+            counter++;
+            word.clear();
+        }
+        else
+        {
+            word += c;
+        }
+    }
+
+    if (!word.empty())
+    {
+        ArtistArr[counter] = word;
+        counter++;
+    }
+    return ArtistArr;
+}
+
+void parseArtistCSV(const string filename, ArtistHashTable *ArtistContainer)
 {
     ifstream file(filename);
     string line;
-    // FOR SINGLE ROW
+    int i = 0;
     while (getline(file, line))
     {
+        i++;
         istringstream iss(line);
         string field;
-        int i = 1;
-        int j = 1;
-        // FOR SINGLE COLUMN
+        if (i == 5)
+            break;
         while (getline(iss, field, ','))
         {
-            cout << field << endl;
+            // SINGLE ARTIST CASE
+            if (!AreThereManyArtists(field))
+            {
+                string *artistName = new string[1];
+
+                ArtistContainer->handler(artistName, 1);
+
+                delete[] artistName;
+            }
+            else
+            {
+                int noOfArtist = countArtists(field);
+                string *arrayOfArtistNames = SeperatingArtist(field, noOfArtist);
+
+                ArtistContainer->handler(arrayOfArtistNames, noOfArtist);
+
+                delete[] arrayOfArtistNames;
+            }
         }
-        // if (!isExists)
     }
 }
