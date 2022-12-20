@@ -2,7 +2,7 @@
 #define TRACKHASHTABLEHEADER
 #include <iostream>
 #include <string>
-#include "Track.h";
+#include "Track.h"
 using namespace std;
 
 // THIS FILE WILL HANDLE THE REQUEST DIRECTLY FROM PARSER FUNCTION
