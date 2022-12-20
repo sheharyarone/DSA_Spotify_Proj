@@ -1,4 +1,5 @@
 #include <iostream>
+#include "HeaderFiles/TrackHAshTable.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -7,7 +8,12 @@ using namespace std;
 
 int main()
 {
-    Track **trackarray = new Track *[20] {};
+
+    TrackHashTable t1;
+    cout<<t1.hashFunction("In The nAme of love");
+
+
+    /*Track **trackarray = new Track *[20] {};
     trackarray[2] = new Track();
     if (trackarray[2])
     {
@@ -17,5 +23,5 @@ int main()
     {
         cout << "AGR OBJECT Ni HUGA TO FALSE HUGA" << endl;
     }
-    return 0;
+    return 0; */
 }

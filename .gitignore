@@ -1,2 +1,4 @@
 .vscode
 main.exe
+*.txt
+cmake-build-debug
