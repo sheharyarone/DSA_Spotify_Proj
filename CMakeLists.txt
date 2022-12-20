@@ -14,4 +14,4 @@ add_executable(DSA_Spotify_Proj
         HeaderFiles/Track.h
         HeaderFiles/TrackHashTable.h
         Parser/Parser.h
-        main.cpp)
+        main.cpp HeaderFiles/AVLTree.h)

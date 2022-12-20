@@ -3,8 +3,31 @@
 #include <iostream>
 #include <string>
 #include "Artist.h"
+#include "AVLTree.h"
+#include "TrackHashTable.h"
 
 using namespace std;
+
+class ArtistHashTable{
+public:
+    int size;
+    int count=0;
+    AVLTree<Artist> *HashTableSize;
+    ArtistHashTable(int size){
+
+        HashTableSize= new AVLTree<Artist> [size];
+
+    }
+    void Push(Artist t1){
+        
+        HashTableSize[count++].InsertNode;
+    }
+};
+
+void ArtistHashStore(string s){
+    ArtistHashTable ArtistMain(101473);
+
+}
 
 // WE WILL BE STRORING ALL OF OUR ARTIST RECORD HERE
 // FIRST OF ALL WHEN ADDING A SONGS WE WILL FIRST CONSIDER ITS ARTIST
