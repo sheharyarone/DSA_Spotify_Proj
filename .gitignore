@@ -1,5 +1,7 @@
 .vscode
 main.exe
+.idea
+
 <<<<<<< HEAD
 *.exe
 =======
