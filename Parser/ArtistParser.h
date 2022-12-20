@@ -62,8 +62,6 @@ void parseArtistCSV(const string filename, ArtistHashTable *ArtistContainer)
         i++;
         istringstream iss(line);
         string field;
-        if (i == 5)
-            break;
         while (getline(iss, field, ','))
         {
             // SINGLE ARTIST CASE

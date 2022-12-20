@@ -1,13 +1,11 @@
 #ifndef ARTISTHEADER
 #define ARTISTHEADER
-#include  "AVLTREE.h"
+#include "AVLTREE.h"
 
 #include <iostream>
 #include <string>
 #include "Track.h"
 using namespace std;
-
-
 
 // IF ARTIST IS NOT FOUND
 // ARTIST HASH TABLE WILL CALL THIS FILE AND WILL MAKE AN ARTIST OBJECT
@@ -70,6 +68,11 @@ public:
     Artist(string name)
     {
         this->name = name;
+        SongsList = NULL;
+    }
+    Artist()
+    {
+        this->name = "";
         SongsList = NULL;
     }
 };
