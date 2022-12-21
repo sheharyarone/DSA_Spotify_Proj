@@ -6,168 +6,173 @@
 #define DSA_SPOTIFY_PROJ_AVLTREE_H
 #include <iostream>
 using namespace std;
+#define pow2(n) (1 << (n))
+
+
 template <class T>
-class AVLNode{
+class avl_tree {
 public:
-    T data;
-    AVLNode<T> *LeftChild;
-    AVLNode<T> *RightChild;
-    int height;
-};
-template <class T>
-class AVLTree{
-public:
-    int max(int a,int b){
-        return (a>b) ? a:b;
-    }
-    int height(AVLNode<T> *x){
-        if(x==NULL)
-            return 0;
-        return x->height;
-    }
-    AVLNode<T> * NewNode(int key){
-        AVLNode<T> *node=new AVLNode<T>;
-        node->data=key;
-        node->RightChildChild=NULL;
-        node->LeftChildChild=NULL;
-        node->height=1;
-        return node;
-    }
-    AVLNode<T> *RightChildRotate(AVLNode<T> *y){
-        AVLNode<T> *x=y->LeftChildChild;
-        AVLNode<T> *T2=x->RightChildChild;
-        x->RightChildChild=y;
-        y->LeftChildChild=T2;
-        y->height=max(height(y->LeftChildChild, height(y->RightChildChild)))+1;
-        x->height=max(height(x->LeftChildChild), height(x->RightChildChild))+1;
-        return x;
-    }
-    AVLNode<T> *LeftChildRotate(AVLNode<T> *x){
-        AVLNode<T> *y=x->RightChildChild;
-        AVLNode <T> *T2=y->LeftChildChild;
-        y->LeftChildChild=x;
-        x->RightChildChild=T2;
-        x->height=max(height(x->RightChildChild),height(x->LeftChildChild))+1;
-        y->height=max(height(y->RightChildChild), height(y->LeftChildChild))+1;
-        return y;
-    }
-    int getBalanceFactor(AVLNode <T> *x){
-        if(x==NULL)
-            return 0;
-        return (height(x->LeftChildChild)- height(x->RightChildChild));
-    }
-    AVLNode<T> *InsertNode(AVLNode<T> *x,int key){
-        if(x==NULL)
-            return (NewNode(key));
-        if(key<x->data)
-            x->LeftChildChild= InsertNode(x->LeftChildChild,key);
-        if(key>x->data)
-            x->RightChildChild= InsertNode(x->RightChildChild,key);
-        else
-            return x;
-        x->height=1+max(height(x->LeftChildChild), height(x->RightChildChild));
-        int BalanceFactor= getBalanceFactor(x);
-        if(BalanceFactor>1){
-            if(key<x->LeftChildChild->data){
-                return RightChildRotate(x);
-            }
-            else if (key>x->LeftChildChild->data){
-                x->LeftChildChild= LeftChildRotate(x->LeftChildChild);
-                return RightChildRotate(x);
-            }
+    class node {
+    public:
+        T d;
+        node *l;
+        node  *r;
+        node():l(NULL),r(NULL){};
+    };
+    node *root;
+    int height(node *t){
+        int h = 0;
+        if (t != NULL) {
+            int l_height = height(t->l);
+            int r_height = height(t->r);
+            int max_height = max(l_height, r_height);
+            h = max_height + 1;
         }
-        if(BalanceFactor<-1){
-            if(key>x->RightChildChild->data)
-                return LeftChildRotate(x);
-            else if(key<x->RightChildChild->data){
-                x->RightChildChild= RightChildRotate(x->RightChildChild);
-                return LeftChildRotate(x);
-            }
-        }
-        return x;
-    }
-    // Node with minimum value
-    AVLNode<T> *nodeWithMimumValue(AVLNode<T> *x) {
-        AVLNode<T> *current = new AVLNode<T>;
-        while (current->LeftChildChild != NULL)
-            current = current->LeftChildChild;
-        return current;
+        return h;
     }
 
-// Delete a node
-    AVLNode<T> *deleteNode(AVLNode<T> *x, int value) {
-        // Find the node and delete it
-        if (x == NULL)
-            return x;
-        if (value < x->data)
-            x->LeftChildChild = deleteNode(x->LeftChildChild, value);
-        else if (value > x->data)
-            x->RightChildChild = deleteNode(x->RightChildChild, value);
-        else {
-            if ((x->LeftChildChild == NULL) ||
-                (x->LeftChildChild == NULL)) {
-                AVLNode<T> *temp = x->LeftChildChild ? x->LeftChildChild : x->RightChildChild;
-                if (temp == NULL) {
-                    temp = x;
-                    x = NULL;
-                } else
-                    *x = *temp;
-                free(temp);
-            } else {
-                AVLNode<T> *temp = nodeWithMimumValue(x->RightChildChild);
-                x->data = temp->data;
-                x->RightChildChild = deleteNode(x->RightChildChild,
-                                         temp->data);
-            }
+    int difference(node *t){
+            int l_height = height(t->l);
+            int r_height = height(t->r);
+            int b_factor = l_height - r_height;
+            return b_factor;
+    };
+    node *rr_rotat(node *parent){
+        node *t;
+        t = parent->r;
+        parent->r = t->l;
+        t->l = parent;
+        cout<<"Right-Right Rotation";
+        return t;
+    }
+    node *ll_rotat(node *parent){
+        node *t;
+        t = parent->l;
+        parent->l = t->r;
+        t->r = parent;
+        cout<<"Left-Left Rotation";
+        return t;
+    };
+    node *lr_rotat(node*parent){
+        node *t;
+        t = parent->l;
+        parent->l = rr_rotat(t);
+        cout<<"Left-Right Rotation";
+        return ll_rotat(parent);
+    };
+    node *rl_rotat(node *parent){
+        node *t;
+        t = parent->r;
+        parent->r = ll_rotat(t);
+        cout<<"Right-Left Rotation";
+        return rr_rotat(parent);
+    };
+    node * balance(node *t){
+        int bal_factor = difference(t);
+        if (bal_factor > 1) {
+            if (difference(t->l) > 0)
+                t = ll_rotat(t);
+            else
+                t = lr_rotat(t);
+        } else if (bal_factor < -1) {
+            if (difference(t->r) > 0)
+                t = rl_rotat(t);
+            else
+                t = rr_rotat(t);
         }
+        return t;
+    };
 
-        if (x == NULL)
-            return x;
+    node * insert(node *r,T v){
 
-        // Update the balance factor of each node and
-        // balance the tree
-        x->height = 1 + max(height(x->LeftChildChild),
-                               height(x->RightChild));
-        int balanceFactor = getBalanceFactor(x);
-        if (balanceFactor > 1) {
-            if (getBalanceFactor(x->LeftChild) >= 0) {
-                return RightChildRotate(x);
-            } else {
-                x->LeftChild = LeftChildRotate(x->LeftChild);
-                return RightChildRotate(x);
-            }
+        if (r == NULL) {
+            r = new node;
+            r->d = v;
+            r->l = NULL;
+            r->r = NULL;
+            return r;
         }
-        if (balanceFactor < -1) {
-            if (getBalanceFactor(x->RightChild) <= 0) {
-                return LeftChildRotate(x);
-            } else {
-                x->RightChild = RightChildRotate(x->RightChild);
-                return LeftChildRotate(x);
-            }
+        else if(v==r->d){
+            return nullptr;
         }
-        return x;
+        else if (v< r->d) {
+            r->l = insert(r->l, v);
+            r = balance(r);
+        } else if (v >= r->d) {
+            r->r = insert(r->r, v);
+            r = balance(r);
+        } return r;
     }
 
-// Print the tree
-    void printTree(AVLNode<T> *x, string indent, bool last) {
-        if (x != nullptr) {
-            cout << indent;
-            if (last) {
-                cout << "R----";
-                indent += "   ";
-            } else {
-                cout << "L----";
-                indent += "|  ";
-            }
-            cout << x->key << endl;
-            printTree(x->LeftChild, indent, false);
-            printTree(x->RightChild, indent, true);
-        }
+    /*void show(node*, int);
+    void inorder(node *);
+    void preorder(node *);
+    void postorder(node*);
+     */
+    avl_tree() {
+        root = NULL;
     }
-
-
 };
 
+
+
+
+/*template <class T>
+node *avl_tree<T>::insert(node *r, T v) {
+    if (r == NULL) {
+        r = new node;
+        r->d = v;
+        r->l = NULL;
+        r->r = NULL;
+        return r;
+    } else if (v< r->d) {
+        r->l = insert(r->l, v);
+        r = balance(r);
+    } else if (v >= r->d) {
+        r->r = insert(r->r, v);
+        r = balance(r);
+    } return r;
+}
+ */
+/*template <class T>
+void avl_tree<T>::show(node *p, int l) {
+    int i;
+    if (p != NULL) {
+        show(p->r, l+ 1);
+        cout<<" ";
+        if (p == root)
+            cout << "Root -> ";
+        for (i = 0; i < l&& p != root; i++)
+            cout << " ";
+        cout << p->d;
+        show(p->l, l + 1);
+    }
+}
+template <class T>
+void avl_tree<T>::inorder(node *t) {
+    if (t == NULL)
+        return;
+    inorder(t->l);
+    cout << t->d << " ";
+    inorder(t->r);
+}
+template <class T>
+void avl_tree<T>::preorder(node *t) {
+    if (t == NULL)
+        return;
+    cout << t->d << " ";
+    preorder(t->l);
+    preorder(t->r);
+}
+template <class T>
+void avl_tree<T>::postorder(node *t) {
+    if (t == NULL)
+        return;
+    postorder(t ->l);
+    postorder(t ->r);
+    cout << t->d << " ";
+}
+*/
 
 
 #endif //DSA_SPOTIFY_PROJ_AVLTREE_H
