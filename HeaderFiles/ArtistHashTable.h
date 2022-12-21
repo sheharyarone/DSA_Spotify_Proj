@@ -3,10 +3,9 @@
 #include <iostream>
 #include <string>
 #include "Artist.h"
-// #include "AVLTree.h"
 
 using namespace std;
-int noOfCOLLISIONS = 0;
+int noOfCollisions = 0;
 // THIS FILE WILL HANDLE THE REQUEST DIRECTLY FROM PARSER FUNCTION
 // IF TRACK IS FOUND THEN IT WILL ADD THE GENRE / PLAYLIST (WHICH WILL BE IMPLEMENTED LATER ON) USING TRACK.H
 // IF TRACK IS NOT FOUND THEN IT WILL CALL TRACK.h FILE
@@ -15,6 +14,11 @@ class ArtistNode
 public:
     Artist *ArtistPointer;
     ArtistNode *next;
+    ArtistNode()
+    {
+        ArtistPointer = NULL;
+        next = NULL;
+    }
     ArtistNode(string name)
     {
         ArtistPointer = new Artist(name);
@@ -27,7 +31,11 @@ class ArtistLinkList
 public:
     ArtistNode *headArtist;
     int collisions;
-
+    ArtistLinkList()
+    {
+        headArtist = NULL;
+        collisions = 0;
+    }
     ArtistLinkList(string name)
     {
         this->headArtist = new ArtistNode(name);
@@ -37,7 +45,7 @@ public:
     void addArtistInList(string name)
     {
         collisions++;
-        noOfCOLLISIONS++;
+        noOfCollisions++;
         ArtistNode *node = new ArtistNode(name);
         if (headArtist == NULL)
         {
@@ -79,26 +87,25 @@ public:
             }
             temp = temp->next;
         }
-        cout << "___________________________________________" << endl;
     }
-    void displayAll()
-    {
-        if (headArtist == NULL)
-        {
-            cout << "linked list is empty" << endl;
-            return;
-        }
-        cout << endl
-             << "----link list items------" << endl;
-        ArtistNode *temp = headArtist;
-        while (temp != NULL)
-        {
-            cout << temp->ArtistPointer->name << " | ";
-            temp = temp->next;
-        }
-        cout << endl
-             << "--------------------------" << endl;
-    }
+    // void displayAll()
+    // {
+    //     if (headArtist == NULL)
+    //     {
+    //         cout << "linked list is empty" << endl;
+    //         return;
+    //     }
+    //     cout << endl
+    //          << "----link list items------" << endl;
+    //     ArtistNode *temp = headArtist;
+    //     while (temp != NULL)
+    //     {
+    //         cout << temp->ArtistPointer->name << " | ";
+    //         temp = temp->next;
+    //     }
+    //     cout << endl
+    //          << "--------------------------" << endl;
+    // }
     void deleteNode(string name)
     {
         // If the list is empty, there is nothing to delete

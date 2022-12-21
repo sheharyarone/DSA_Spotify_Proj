@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 #include "Track.h"
+#include "ArtistHashTable.h"
 
 using namespace std;
-int noOfCOLLISIONS = 0;
 // THIS FILE WILL HANDLE THE REQUEST DIRECTLY FROM PARSER FUNCTION
 // IF TRACK IS FOUND THEN IT WILL ADD THE GENRE / PLAYLIST (WHICH WILL BE IMPLEMENTED LATER ON) USING TRACK.H
 // IF TRACK IS NOT FOUND THEN IT WILL CALL TRACK.h FILE
@@ -14,6 +14,7 @@ class TrackNode
 public:
     Track *TrackPointer;
     TrackNode *next;
+    TrackNode() {}
     TrackNode(string *array, ArtistHashTable *ArtistContainer)
     {
         TrackPointer = new Track(array, ArtistContainer); // IDR HM ARRAY PASS KRA DEI GY OR 1 FUNCITON BNA DEI GY JO ARTIST KE POINTER UTHA KR LYE GA
@@ -26,7 +27,7 @@ class LinkedList
 public:
     TrackNode *head;
     int collisions;
-
+    LinkedList() {}
     LinkedList(string *array, ArtistHashTable *ArtistContainer)
     {
         this->head = new TrackNode(array, ArtistContainer);
@@ -36,7 +37,6 @@ public:
     void addTrackInList(string *array, ArtistHashTable *ArtistContainer)
     {
         collisions++;
-        noOfCOLLISIONS++;
         TrackNode *node = new TrackNode(array, ArtistContainer);
         if (head == NULL)
         {

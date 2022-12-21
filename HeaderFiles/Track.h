@@ -1,10 +1,10 @@
 #ifndef TRACKHEADER
 #define TRACKHEADER
-
 #include <iostream>
 #include <string>
 #include "Artist.h"
 #include "../Functions/ArtistFunc.h"
+#include "ArtistHashTable.h"
 using namespace std;
 
 class ArtistInTrackNode
@@ -12,6 +12,11 @@ class ArtistInTrackNode
 public:
     Artist *ArtistPointer;
     ArtistInTrackNode *next;
+    ArtistInTrackNode()
+    {
+        ArtistPointer = NULL;
+        next = NULL;
+    }
     ArtistInTrackNode(Artist *ArtistPointer)
     {
         this->ArtistPointer = ArtistPointer;
@@ -22,6 +27,10 @@ class ArtistsForTrack
 {
 public:
     ArtistInTrackNode *headArtist;
+    ArtistsForTrack()
+    {
+        headArtist = NULL;
+    }
     ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer)
     {
         if (!AreThereManyArtists(allArtistNames))
@@ -74,6 +83,7 @@ public:
     Track()
     {
         Title = "";
+        Artists = NULL;
         Duration = 0;
         Explicit = 0;
         Dancebility = 0;

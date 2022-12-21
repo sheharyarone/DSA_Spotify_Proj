@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include "../HeaderFiles/ArtistHashTable.h"
 using namespace std;
 
 bool AreThereManyArtists(string s)

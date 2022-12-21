@@ -4,7 +4,9 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "../HeaderFiles/TrackHashTable.h";
+#include "../HeaderFiles/TrackHashTable.h"
+#include "../HeaderFiles/ArtistHashTable.h"
+
 using namespace std;
 
 void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHashTable *TrackContainer)
