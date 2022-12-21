@@ -40,26 +40,15 @@ public:
         return (!(trackarray[ExistOn]));
     }
 
-    int ComputePower(int value,int power){
-        if(power!=0)
-            return(value* ComputePower(value,power-1));
-        else
-            return 1;
-    }
-
     int hashFunction(string s)
     {
-        long long int  sum=0;
-        int value = 3;
+        int sum = 0;
         for (int i = 0; i < s.length(); i++)
         {
-            s[i]= tolower(s[i]);
-            //cout<<s[i]<<endl;
-            sum += s[i] * ComputePower(value,i);
+            sum += (int)s[i];
         }
         // SUM TO BE MULTIPLIED BY PRIME NUMBER
-        //Will add table size over here rather than a random number.
-        return (sum % 101473);
+        return (sum % tablesize);
     }
 
     void hashStore(Track *s)
