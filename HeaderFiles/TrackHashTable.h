@@ -6,6 +6,9 @@
 #include "ArtistHashTable.h"
 
 using namespace std;
+int noOfCollisions = 0;
+int noOfUniqueSongs = 0;
+
 // THIS FILE WILL HANDLE THE REQUEST DIRECTLY FROM PARSER FUNCTION
 // IF TRACK IS FOUND THEN IT WILL ADD THE GENRE / PLAYLIST (WHICH WILL BE IMPLEMENTED LATER ON) USING TRACK.H
 // IF TRACK IS NOT FOUND THEN IT WILL CALL TRACK.h FILE
@@ -30,6 +33,7 @@ public:
     LinkedList() {}
     LinkedList(string *array, ArtistHashTable *ArtistContainer)
     {
+
         this->head = new TrackNode(array, ArtistContainer);
         collisions = 0;
     }
@@ -37,6 +41,8 @@ public:
     void addTrackInList(string *array, ArtistHashTable *ArtistContainer)
     {
         collisions++;
+        noOfCollisions++;
+
         TrackNode *node = new TrackNode(array, ArtistContainer);
         if (head == NULL)
         {
@@ -57,7 +63,7 @@ public:
         TrackNode *temp = head;
         while (temp != NULL)
         {
-            if (name == head->TrackPointer->Title)
+            if (name == temp->TrackPointer->Title)
             {
                 return true;
             }
@@ -182,10 +188,12 @@ public:
         if (isAvailable(key))
         {
 
+            noOfUniqueSongs++;
             hashTableArr[key] = new LinkedList(arr, ArtistContainer);
         }
         else if (!(hashTableArr[key]->findInList(arr[1])))
         {
+            noOfUniqueSongs++;
             hashTableArr[key]->addTrackInList(arr, ArtistContainer);
         }
     }

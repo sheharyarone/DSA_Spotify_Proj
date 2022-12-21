@@ -77,9 +77,10 @@ public:
     {
         this->name = "";
     }
-    Artist(string name)
+    Artist(string name_)
     {
-        this->name = name;
+
+        this->name = name_;
         // SongsList = NULL;
     }
 };

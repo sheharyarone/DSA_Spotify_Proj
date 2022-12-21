@@ -21,26 +21,34 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
         string field;
         int i = 0;
         int j = 1;
+        bool firstLine = true;
         // FOR SINGLE COLUMN
         while (getline(iss, field, ','))
         {
+            if (field == "")
+            {
+                break;
+            }
             if (j == 1 || j == 2 || j == 4 || j == 20)
             {
                 j++;
                 continue;
             }
             fields[i] = field;
-            // CHECK FOR SKIPPING ARTIST CUZ WE ARE TESTING TRACK FOR NOW
-            // if (j == 5)
-            // {
-            //     int ExistOn = h1->hashFunction(field);
-            // }
+            if (i == 1)
+            {
+                cout << field << endl;
+            }
             i++;
             j++;
-
-            // if (!isExists)
+        }
+        if (field == "")
+        {
+            delete[] fields;
+            continue;
         }
         TrackContainer->handler(fields, 18, ArtistContainer);
+        delete[] fields;
     }
 }
 

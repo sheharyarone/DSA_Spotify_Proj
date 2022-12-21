@@ -24,9 +24,8 @@ void parseArtistCSV(const string filename, ArtistHashTable *ArtistContainer)
             if (!AreThereManyArtists(field))
             {
                 string *artistName = new string[1];
-
+                artistName[0] = field;
                 ArtistContainer->handler(artistName, 1);
-
                 delete[] artistName;
             }
             else
