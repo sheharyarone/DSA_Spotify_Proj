@@ -1,9 +1,8 @@
 .vscode
-main.exe
 .idea
 
 <<<<<<< HEAD
-*.exe
+
 =======
 *.txt
 cmake-build-debug

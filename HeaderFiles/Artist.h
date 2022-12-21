@@ -1,7 +1,5 @@
 #ifndef ARTISTHEADER
 #define ARTISTHEADER
-#include "AVLTREE.h"
-
 #include <iostream>
 #include <string>
 #include "Track.h"

@@ -3,28 +3,57 @@
 
 #include <iostream>
 #include <string>
-// #include "Artist.h"
+#include "Artist.h"
+#include "../Functions/ArtistFunc.h"
 using namespace std;
 
-// THIS FILE WILL BE CALLED IF TRACK IS BEING ADDED FOR THE VERY FIRST TIME
-// OR IF TRACK IS ALREADY IN TRACK HASH TABLE THEN GENRE/ PLAYLIST WILL BE THE REQUIRED THING
-
-// class ArtistsForTrack
-// {
-// public:
-//     Artist *ArtistName;
-//     ArtistsForTrack *NextArtist;
-//     ArtistsForTrack()
-//     {
-//         //
-//     }
-// };
+class ArtistInTrackNode
+{
+public:
+    Artist *ArtistPointer;
+    ArtistInTrackNode *next;
+    ArtistInTrackNode(Artist *ArtistPointer)
+    {
+        this->ArtistPointer = ArtistPointer;
+        next = NULL;
+    }
+};
+class ArtistsForTrack
+{
+public:
+    ArtistInTrackNode *headArtist;
+    ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer)
+    {
+        if (!AreThereManyArtists(allArtistNames))
+        {
+            headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(allArtistNames));
+        }
+        else
+        {
+            int noOfArtist = countArtists(allArtistNames);
+            string *arrayOfArtistNames = SeperatingArtist(allArtistNames, noOfArtist);
+            headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(arrayOfArtistNames[0]));
+            for (int i = 1; i < noOfArtist; i++)
+            {
+            }
+        }
+    }
+    void addArtistInList(string name, ArtistHashTable *ArtistContainer)
+    {
+        ArtistInTrackNode *temp = headArtist;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name));
+    }
+};
 
 class Track
 {
 public:
     string Title;
-    // ArtistsForTrack *Artists;
+    ArtistsForTrack *Artists;
     // singlyNode<string> *Genre;
     // singlyNode<string> *Playlist;
     int Duration;
@@ -61,26 +90,26 @@ public:
         TimeSignature = 0;
     }
 
-    Track(string *array)
+    Track(string *array, ArtistHashTable *ArtistContainer)
     {
-        Title = array[4];
-        // Artists = NULL;
+        Title = array[1];
+        Artists = new ArtistsForTrack(array[0], ArtistContainer);
         // Genre = NULL;
         // Playlist = NULL;
-        Duration = stoi(array[6]);
-        Explicit = stoi(array[7]);
-        Dancebility = stof(array[8]);
-        Energy = stof(array[9]);
-        key = stoi(array[10]);
-        Loudness = stof(array[11]);
-        Mode = stoi(array[12]);
-        Speechiness = stof(array[13]);
-        Accousticness = stof(array[14]);
-        Instrumental = stof(array[15]);
-        Liveness = stof(array[16]);
-        Valence = stof(array[17]);
-        Tempo = stof(array[18]);
-        TimeSignature = stoi(array[19]);
+        Duration = stoi(array[2]);
+        Explicit = stoi(array[3]);
+        Dancebility = stof(array[4]);
+        Energy = stof(array[5]);
+        key = stoi(array[6]);
+        Loudness = stof(array[7]);
+        Mode = stoi(array[8]);
+        Speechiness = stof(array[9]);
+        Accousticness = stof(array[10]);
+        Instrumental = stof(array[11]);
+        Liveness = stof(array[12]);
+        Valence = stof(array[13]);
+        Tempo = stof(array[14]);
+        TimeSignature = stoi(array[15]);
     }
 };
 

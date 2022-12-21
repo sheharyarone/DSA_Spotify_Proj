@@ -22,15 +22,15 @@ public:
     }
 };
 
-class LinkedList
+class ArtistLinkList
 {
 public:
-    ArtistNode *head;
+    ArtistNode *headArtist;
     int collisions;
 
-    LinkedList(string name)
+    ArtistLinkList(string name)
     {
-        this->head = new ArtistNode(name);
+        this->headArtist = new ArtistNode(name);
         collisions = 0;
     }
 
@@ -39,12 +39,12 @@ public:
         collisions++;
         noOfCOLLISIONS++;
         ArtistNode *node = new ArtistNode(name);
-        if (head == NULL)
+        if (headArtist == NULL)
         {
-            head = node;
+            headArtist = node;
             return;
         }
-        ArtistNode *temp = head;
+        ArtistNode *temp = headArtist;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -55,27 +55,42 @@ public:
     {
         // IF FOUND RETURNS TRUE
         // FALSE OTHERWISE
-        ArtistNode *temp = head;
+        ArtistNode *temp = headArtist;
         while (temp != NULL)
         {
-            if (name == head->ArtistPointer->name)
+            if (name == headArtist->ArtistPointer->name)
             {
                 return true;
             }
-            temp=temp->next;
+            temp = temp->next;
         }
         return false;
     }
+    Artist *GetArtistPointerFromList(string name)
+    {
+        // IF FOUND RETURNS TRUE
+        // FALSE OTHERWISE
+        ArtistNode *temp = headArtist;
+        while (temp != NULL)
+        {
+            if (name == headArtist->ArtistPointer->name)
+            {
+                return temp->ArtistPointer;
+            }
+            temp = temp->next;
+        }
+        cout << "___________________________________________" << endl;
+    }
     void displayAll()
     {
-        if (head == NULL)
+        if (headArtist == NULL)
         {
             cout << "linked list is empty" << endl;
             return;
         }
         cout << endl
              << "----link list items------" << endl;
-        ArtistNode *temp = head;
+        ArtistNode *temp = headArtist;
         while (temp != NULL)
         {
             cout << temp->ArtistPointer->name << " | ";
@@ -87,17 +102,17 @@ public:
     void deleteNode(string name)
     {
         // If the list is empty, there is nothing to delete
-        if (!head)
+        if (!headArtist)
             return;
-        ArtistNode *head_ = head;
+        ArtistNode *head_ = headArtist;
         // If the node to be deleted is the head of the list,
         // update the head to point to the next node
         if (head_->ArtistPointer->name == name)
         {
-            ArtistNode *temp = head;
+            ArtistNode *temp = headArtist;
             head_ = head_->next;
             delete temp;
-            head = head_;
+            headArtist = head_;
             return;
         }
 
@@ -121,26 +136,42 @@ class ArtistHashTable
 {
 public:
     int tablesize;
-    LinkedList **trackarray;
+    ArtistLinkList **hashTableArr;
 
     ArtistHashTable()
     {
         cout << "OBJECT CREATED" << endl;
         // WE CAN ASK THE USER HERE FOR THE SIZE OF HASHTABLE AS WELL
         tablesize = 50011;
-        trackarray = new LinkedList *[tablesize]();
+        hashTableArr = new ArtistLinkList *[tablesize]();
     }
 
     ~ArtistHashTable()
     {
         for (int i = 0; i < tablesize; i++)
         {
-            LinkedList *temp = trackarray[i];
+            ArtistLinkList *temp = hashTableArr[i];
             delete temp;
         }
-        delete[] trackarray;
+        delete[] hashTableArr;
     }
-
+    string getHeadArtistName(int hashFunctionKey)
+    {
+        return (hashTableArr[hashFunctionKey]->headArtist->ArtistPointer->name);
+    }
+    // GET ARTIST POINTER AND IT WILL BE THERE
+    Artist *GetArtistPointer(string name)
+    {
+        int key = hashFunction(name);
+        if (getHeadArtistName(key) == name)
+        {
+            return hashTableArr[key]->headArtist->ArtistPointer;
+        }
+        else
+        {
+            return hashTableArr[key]->GetArtistPointerFromList(name);
+        }
+    }
     bool isAvailable(int ExistOn)
     {
         // IF ARRAY CONTAINS POINTER = TRUE
@@ -148,7 +179,7 @@ public:
 
         // IF ARRAY DOESN'T CONTAINS POINTER = FALSE
         // IN THE ABOVE CASE THIS FUNCTION WILL RETURN TRUE BECAUSE SPACE IS FREE
-        return (!(trackarray[ExistOn]));
+        return (!(hashTableArr[ExistOn]));
     }
 
     int computePower(int value, int power)
@@ -183,11 +214,11 @@ public:
         if (isAvailable(key))
         {
 
-            trackarray[key] = new LinkedList(name);
+            hashTableArr[key] = new ArtistLinkList(name);
         }
-        else if (!(trackarray[key]->findInList(name)))
+        else if (!(hashTableArr[key]->findInList(name)))
         {
-            trackarray[key]->addArtistInList(name);
+            hashTableArr[key]->addArtistInList(name);
         }
     }
 
