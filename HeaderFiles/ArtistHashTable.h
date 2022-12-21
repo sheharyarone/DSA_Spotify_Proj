@@ -51,6 +51,21 @@ public:
         }
         temp->next = node;
     }
+    bool findInList(string name)
+    {
+        // IF FOUND RETURNS TRUE
+        // FALSE OTHERWISE
+        ArtistNode *temp = head;
+        while (temp != NULL)
+        {
+            if (name == head->ArtistPointer->name)
+            {
+                return true;
+            }
+            temp=temp->next;
+        }
+        return false;
+    }
     void displayAll()
     {
         if (head == NULL)
@@ -113,7 +128,7 @@ public:
         cout << "OBJECT CREATED" << endl;
         // WE CAN ASK THE USER HERE FOR THE SIZE OF HASHTABLE AS WELL
         tablesize = 50011;
-        trackarray = new LinkedList *[tablesize] {};
+        trackarray = new LinkedList *[tablesize]();
     }
 
     ~ArtistHashTable()
@@ -125,6 +140,7 @@ public:
         }
         delete[] trackarray;
     }
+
     bool isAvailable(int ExistOn)
     {
         // IF ARRAY CONTAINS POINTER = TRUE
@@ -146,7 +162,7 @@ public:
     int hashFunction(string s)
     {
         long long int sum = 0;
-        int value = 3;
+        int value = 7;
         for (int i = 0; i < s.length(); i++)
         {
             s[i] = tolower(s[i]);
@@ -163,11 +179,13 @@ public:
     void hashStore(string name)
     {
         int key = hashFunction(name);
+
         if (isAvailable(key))
         {
+
             trackarray[key] = new LinkedList(name);
         }
-        else
+        else if (!(trackarray[key]->findInList(name)))
         {
             trackarray[key]->addArtistInList(name);
         }

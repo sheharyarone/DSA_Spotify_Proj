@@ -65,19 +65,14 @@ public:
     string name;
     ListingArtistSongs *SongsList;
     // FROM NXT NODE WE WILL SEE ALL THE TRACKS
-    Artist(){
-        SongsList=NULL;
+    Artist()
+    {
+        SongsList = NULL;
     }
     Artist(string name)
     {
         this->name = name;
         SongsList = NULL;
-    }
-    bool operator<(Artist RHS){
-        return name<RHS.name;
-    }
-    bool operator>=(Artist RHS){
-        return name>=RHS.name;
     }
     Artist()
     {
