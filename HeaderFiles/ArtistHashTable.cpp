@@ -28,7 +28,6 @@ ArtistLinkList::ArtistLinkList(string name)
     this->headArtist = new ArtistNode(name);
     collisions = 0;
 }
-
 void ArtistLinkList::addArtistInList(string name)
 {
     noOfCollisionsInArtist++;
@@ -61,7 +60,7 @@ bool ArtistLinkList::findInList(string name_)
     }
     return false;
 }
-Artist *ArtistLinkList::GetArtistPointerFromList(string name)
+Artist *ArtistLinkList::GetArtistPointerFromList(string name,Track *trackPointerToAdd)
 {
     // IF FOUND RETURNS TRUE
     // FALSE OTHERWISE
@@ -69,8 +68,10 @@ Artist *ArtistLinkList::GetArtistPointerFromList(string name)
     while (temp != NULL)
     {
 
-        if (name == headArtist->ArtistPointer->name)
+        if (name == temp->ArtistPointer->name)
         {
+            temp->ArtistPointer->trackHandler(trackPointerToAdd);
+
             return temp->ArtistPointer;
         }
         temp = temp->next;
@@ -127,13 +128,11 @@ void ArtistLinkList::deleteNode(string name)
         delete temp;
     }
 }
-
 ArtistHashTable::ArtistHashTable(int size = 50011)
 {
     tablesize = size;
     hashTableArr = new ArtistLinkList *[tablesize] {};
 }
-
 ArtistHashTable::~ArtistHashTable()
 {
     for (int i = 0; i < tablesize; i++)
@@ -148,16 +147,17 @@ string ArtistHashTable::getHeadArtistName(int hashFunctionKey)
     return (hashTableArr[hashFunctionKey]->headArtist->ArtistPointer->name);
 }
 // GET ARTIST POINTER AND IT WILL BE THERE
-Artist *ArtistHashTable::GetArtistPointer(string name)
+Artist *ArtistHashTable::GetArtistPointer(string name, Track *trackPointerToAdd)
 {
     int key = hashFunction(name);
     if (getHeadArtistName(key) == name)
     {
+        hashTableArr[key]->headArtist->ArtistPointer->trackHandler(trackPointerToAdd);
         return hashTableArr[key]->headArtist->ArtistPointer;
     }
     else
     {
-        return hashTableArr[key]->GetArtistPointerFromList(name);
+        return hashTableArr[key]->GetArtistPointerFromList(name,trackPointerToAdd);
     }
 }
 bool ArtistHashTable::isAvailable(int ExistOn)
@@ -169,7 +169,6 @@ bool ArtistHashTable::isAvailable(int ExistOn)
     // IN THE ABOVE CASE THIS FUNCTION WILL RETURN TRUE BECAUSE SPACE IS FREE
     return (!(hashTableArr[ExistOn]));
 }
-
 int ArtistHashTable::computePower(int value, int power)
 {
     if (power != 0)
@@ -177,7 +176,6 @@ int ArtistHashTable::computePower(int value, int power)
     else
         return 1;
 }
-
 int ArtistHashTable::hashFunction(string s)
 {
     long long int sum = 0;
@@ -193,7 +191,6 @@ int ArtistHashTable::hashFunction(string s)
         sum *= -1;
     return (sum % tablesize);
 }
-
 void ArtistHashTable::hashStore(string name)
 {
     int key = hashFunction(name);
@@ -208,7 +205,6 @@ void ArtistHashTable::hashStore(string name)
         hashTableArr[key]->addArtistInList(name);
     }
 }
-
 void ArtistHashTable::handler(string *arr, int noOfArtists)
 {
     for (int i = 0; i < noOfArtists; i++)

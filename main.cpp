@@ -15,6 +15,9 @@ int main()
     cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
     cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
 
+    int key = ArtistContainer->hashFunction("Brandi Carlile");
+    ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->SongsList->displayAll();
+
     // int key = TrackContainer->hashFunction("Comedy");
     // TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();
     // std::ofstream outfile;      // Create ofstream object

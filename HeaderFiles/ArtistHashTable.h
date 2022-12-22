@@ -20,7 +20,7 @@ public:
 
     void addArtistInList(std::string);
     bool findInList(std::string);
-    Artist *GetArtistPointerFromList(std::string);
+    Artist *GetArtistPointerFromList(std::string, Track *);
     void displayAll();
     void deleteNode(std::string);
 };
@@ -34,7 +34,7 @@ public:
     ~ArtistHashTable();
     std::string getHeadArtistName(int hashFunctionKey);
     // GET ARTIST POINTER AND IT WILL BE THERE
-    Artist *GetArtistPointer(std::string name);
+    Artist *GetArtistPointer(std::string name, Track *);
     bool isAvailable(int ExistOn);
 
     int computePower(int value, int power);

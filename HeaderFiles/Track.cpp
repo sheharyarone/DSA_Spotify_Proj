@@ -22,31 +22,31 @@ ArtistsForTrack::ArtistsForTrack()
 {
     headArtist = NULL;
 }
-ArtistsForTrack::ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer)
+ArtistsForTrack::ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer,Track *trackPointer)
 {
     if (!AreThereManyArtists(allArtistNames))
     {
-        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(allArtistNames));
+        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(allArtistNames,trackPointer));
     }
     else
     {
         int noOfArtist = countArtists(allArtistNames);
         string *arrayOfArtistNames = SeperatingArtist(allArtistNames, noOfArtist);
-        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(arrayOfArtistNames[0]));
+        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(arrayOfArtistNames[0],trackPointer));
         for (int i = 1; i < noOfArtist; i++)
         {
-            addArtistInList(arrayOfArtistNames[i], ArtistContainer);
+            addArtistInList(arrayOfArtistNames[i], ArtistContainer,trackPointer);
         }
     }
 }
-void ArtistsForTrack::addArtistInList(string name, ArtistHashTable *ArtistContainer)
+void ArtistsForTrack::addArtistInList(string name, ArtistHashTable *ArtistContainer,Track *trackPointer)
 {
     ArtistInTrackNode *temp = headArtist;
     while (temp->next != NULL)
     {
         temp = temp->next;
     }
-    temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name));
+    temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name,trackPointer));
 }
 void ArtistsForTrack::displayAll()
 {
@@ -89,7 +89,7 @@ Track::Track()
 Track::Track(string *array, ArtistHashTable *ArtistContainer)
 {
     Title = array[1];
-    Artists = new ArtistsForTrack(array[0], ArtistContainer);
+    Artists = new ArtistsForTrack(array[0], ArtistContainer,this);
     // Genre = NULL;
     // Playlist = NULL;
     Duration = stoi(array[2]);

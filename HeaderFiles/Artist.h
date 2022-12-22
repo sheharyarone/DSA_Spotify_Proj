@@ -5,7 +5,7 @@ class ArtistSong
 {
 public:
     Track *TrackInfo;
-    ArtistSong *NextArtistTrack;
+    ArtistSong *NextTrack;
     ArtistSong();
     ArtistSong(Track *);
 };
@@ -18,6 +18,7 @@ public:
     ListingArtistSongs(Track *);
     void addTrack(Track *);
     bool TrackCheck(Track *);
+    void displayAll();
 };
 
 class Artist
@@ -28,4 +29,5 @@ public:
     // FROM NXT NODE WE WILL SEE ALL THE TRACKS
     Artist();
     Artist(std::string);
+    void trackHandler(Track *); // WILL BE CALLED BY ARTSITHASHTABLE FOR ADDING TRACK WHILE ITS CREATION
 };

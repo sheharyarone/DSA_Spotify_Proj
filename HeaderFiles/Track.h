@@ -16,8 +16,8 @@ class ArtistsForTrack
 public:
     ArtistInTrackNode *headArtist;
     ArtistsForTrack();
-    ArtistsForTrack(std::string allArtistNames, ArtistHashTable *ArtistContainer);
-    void addArtistInList(std::string name, ArtistHashTable *ArtistContainer);
+    ArtistsForTrack(std::string, ArtistHashTable *, Track *);
+    void addArtistInList(std::string, ArtistHashTable *, Track *);
     void displayAll();
 };
 
@@ -44,5 +44,5 @@ public:
     int TimeSignature;
 
     Track();
-    Track(std::string *array, ArtistHashTable *ArtistContainer);
+    Track(std::string *, ArtistHashTable *);
 };

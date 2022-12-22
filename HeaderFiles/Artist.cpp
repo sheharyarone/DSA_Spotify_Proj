@@ -8,12 +8,12 @@ using namespace std;
 ArtistSong::ArtistSong()
 {
     TrackInfo = NULL;
-    NextArtistTrack = NULL;
+    NextTrack = NULL;
 }
 ArtistSong::ArtistSong(Track *toBeSave)
 {
     TrackInfo = toBeSave;
-    NextArtistTrack = NULL;
+    NextTrack = NULL;
 }
 ListingArtistSongs::ListingArtistSongs()
 {
@@ -38,17 +38,22 @@ Artist::Artist(string name)
 
 void ListingArtistSongs::addTrack(Track *toBeSave)
 {
+    if (HeadTrack == NULL)
+    {
+        HeadTrack = new ArtistSong(toBeSave);
+        return;
+    }
     if (!TrackCheck(toBeSave))
     {
         // NxtToBeSaved WILL BE ON THAT ARTISTNODE NXT TO WHICH SONG NEEDS TO BE ADDED
-        NxtToBeSaved->NextArtistTrack = new ArtistSong(toBeSave);
+        NxtToBeSaved->NextTrack = new ArtistSong(toBeSave);
     }
     NxtToBeSaved = NULL;
 }
 bool ListingArtistSongs::TrackCheck(Track *toBeSave)
 {
     NxtToBeSaved = HeadTrack;
-    while (NxtToBeSaved->NextArtistTrack != NULL)
+    while (NxtToBeSaved->NextTrack != NULL)
     {
         // CHECK FOR DUPLICATION CUZ SONGS ARE IN DIFFERENT PLAYLISTS
         if (toBeSave->Title == NxtToBeSaved->TrackInfo->Title)
@@ -56,8 +61,31 @@ bool ListingArtistSongs::TrackCheck(Track *toBeSave)
             // IF FOUND THEN TRUE
             return true;
         }
-        NxtToBeSaved = NxtToBeSaved->NextArtistTrack;
+        NxtToBeSaved = NxtToBeSaved->NextTrack;
     }
     // FALSE ELSEWISE
     return false;
+}
+void Artist::trackHandler(Track *toAddInList)
+{
+    SongsList->addTrack(toAddInList);
+}
+void ListingArtistSongs::displayAll()
+{
+
+    if (HeadTrack == NULL)
+    {
+        cout << "linked list is empty" << endl;
+        return;
+    }
+    cout << endl
+         << "----link list items------" << endl;
+    ArtistSong *temp = HeadTrack;
+    while (temp != NULL)
+    {
+        cout << temp->TrackInfo->Title << " | ";
+        temp = temp->NextTrack;
+    }
+    cout << endl
+         << "--------------------------" << endl;
 }
