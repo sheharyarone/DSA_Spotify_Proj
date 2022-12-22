@@ -57,6 +57,24 @@ public:
         }
         temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name));
     }
+    void displayAll()
+    {
+        if (headArtist == NULL)
+        {
+            cout << "linked list is empty" << endl;
+            return;
+        }
+        cout << endl
+             << "----link list items------" << endl;
+        ArtistInTrackNode *temp = headArtist;
+        while (temp != NULL)
+        {
+            cout << temp->ArtistPointer->name << " | ";
+            temp = temp->next;
+        }
+        cout << endl
+             << "--------------------------" << endl;
+    }
 };
 
 class Track

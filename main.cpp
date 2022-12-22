@@ -18,11 +18,9 @@ int main()
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer);
     cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
     cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
-    // TESTING FOR ARTIST NAMES IN TRACK RECORD
-    int key = TrackContainer->hashFunction("Nobody Knows Me At All");
-    cout << key << endl;
-    cout << TrackContainer->hashTableArr[key] << endl;
-    // TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();
+
+    int key = TrackContainer->hashFunction("Comedy");
+    TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();
     // std::ofstream outfile;      // Create ofstream object
     // outfile.open("output.txt"); // Open file
 

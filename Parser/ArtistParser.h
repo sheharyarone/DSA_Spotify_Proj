@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "../HeaderFiles/TrackHashTable.h"
 #include "../Functions/ArtistFunc.h"
 #include "../HeaderFiles/ArtistHashTable.h"
 using namespace std;
