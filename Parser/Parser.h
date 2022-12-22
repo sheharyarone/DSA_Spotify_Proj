@@ -25,24 +25,20 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
         // FOR SINGLE COLUMN
         while (getline(iss, field, ','))
         {
-            if (field == "")
+            if (field == "artists")
             {
                 break;
             }
-            if (j == 1 || j == 2 || j == 4 || j == 20)
+            if (j == 2 || j == 18)
             {
                 j++;
                 continue;
             }
             fields[i] = field;
-            if (i == 1)
-            {
-                cout << field << endl;
-            }
             i++;
             j++;
         }
-        if (field == "")
+        if (field == "artists")
         {
             delete[] fields;
             continue;

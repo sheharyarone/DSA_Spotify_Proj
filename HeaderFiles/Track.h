@@ -104,40 +104,23 @@ public:
     Track(string *array, ArtistHashTable *ArtistContainer)
     {
         Title = array[1];
-        cout << Title << endl;
         Artists = new ArtistsForTrack(array[0], ArtistContainer);
-
         // Genre = NULL;
         // Playlist = NULL;
-        // Duration = stoi(array[2]);
-        // Explicit = stoi(array[3]);
-        // Dancebility = stof(array[4]);
-        // Energy = stof(array[5]);
-        // key = stoi(array[6]);
-        // Loudness = stof(array[7]);
-        // Mode = stoi(array[8]);
-        // Speechiness = stof(array[9]);
-        // Accousticness = stof(array[10]);
-        // // Instrumental = stof(array[11]);
-        // Instrumental = 0;
-        // Liveness = stof(array[12]);
-        // Valence = stof(array[13]);
-        // Tempo = stof(array[14]);
-        // TimeSignature = stoi(array[15]);
-        Duration = 0;
-        Explicit = 0;
-        Dancebility = 0;
-        Energy = 0;
-        key = 0;
-        Loudness = 0;
-        Mode = 0;
-        Speechiness = 0;
-        Accousticness = 0;
-        Instrumental = 0;
-        Liveness = 0;
-        Valence = 0;
-        Tempo = 0;
-        TimeSignature = 0;
+        Duration = stoi(array[2]);
+        Explicit = stoi(array[3]);
+        Dancebility = stof(array[4]);
+        Energy = stof(array[5]);
+        key = stoi(array[6]);
+        Loudness = stof(array[7]);
+        Mode = stoi(array[8]);
+        Speechiness = stof(array[9]);
+        Accousticness = stof(array[10]);
+        Instrumental = stof(array[11]);
+        Liveness = stof(array[12]);
+        Valence = stof(array[13]);
+        Tempo = stof(array[14]);
+        TimeSignature = stoi(array[15]);
     }
 };
 

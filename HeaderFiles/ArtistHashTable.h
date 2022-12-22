@@ -87,6 +87,7 @@ public:
             }
             temp = temp->next;
         }
+        return NULL;
     }
     void displayAll()
     {
@@ -145,11 +146,9 @@ public:
     int tablesize;
     ArtistLinkList **hashTableArr;
 
-    ArtistHashTable()
+    ArtistHashTable(int size = 50011)
     {
-        cout << "OBJECT CREATED" << endl;
-        // WE CAN ASK THE USER HERE FOR THE SIZE OF HASHTABLE AS WELL
-        tablesize = 50011;
+        tablesize = size;
         hashTableArr = new ArtistLinkList *[tablesize] {};
     }
 

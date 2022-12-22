@@ -6,7 +6,7 @@
 #include "ArtistHashTable.h"
 
 using namespace std;
-int noOfCollisions = 0;
+int noOfCollisionsInTracks = 0;
 int noOfUniqueSongs = 0;
 
 // THIS FILE WILL HANDLE THE REQUEST DIRECTLY FROM PARSER FUNCTION
@@ -41,7 +41,7 @@ public:
     void addTrackInList(string *array, ArtistHashTable *ArtistContainer)
     {
         collisions++;
-        noOfCollisions++;
+        noOfCollisionsInTracks++;
 
         TrackNode *node = new TrackNode(array, ArtistContainer);
         if (head == NULL)
@@ -128,11 +128,9 @@ public:
     int tablesize;
     LinkedList **hashTableArr;
 
-    TrackHashTable()
+    TrackHashTable(int size = 50011)
     {
-        cout << "OBJECT CREATED" << endl;
-        // WE CAN ASK THE USER HERE FOR THE SIZE OF HASHTABLE AS WELL
-        tablesize = 50011;
+        tablesize = size;
         hashTableArr = new LinkedList *[tablesize]();
     }
 
