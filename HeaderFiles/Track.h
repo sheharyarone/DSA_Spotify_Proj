@@ -1,6 +1,6 @@
 #pragma once
+#include "Artist.cpp"
 // FORWARD DECLARATION
-class Artist;
 class ArtistHashTable;
 
 class ArtistInTrackNode
