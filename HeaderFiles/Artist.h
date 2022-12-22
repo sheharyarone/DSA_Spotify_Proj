@@ -1,10 +1,6 @@
-#ifndef ARTISTHEADER
-#define ARTISTHEADER
-#include <iostream>
-#include <string>
-#include "Track.h"
-using namespace std;
 
+#pragma once
+// #include "Track.h"
 // class ArtistSong
 // {
 // public:
@@ -66,18 +62,9 @@ using namespace std;
 class Artist
 {
 public:
-    string name;
+    std::string name;
     // ListingArtistSongs *SongsList;
     // FROM NXT NODE WE WILL SEE ALL THE TRACKS
-    Artist()
-    {
-        this->name = "";
-    }
-    Artist(string name_)
-    {
-
-        this->name = name_;
-        // SongsList = NULL;
-    }
+    Artist();
+    Artist(std::string);
 };
-#endif // ARTISTHEADER

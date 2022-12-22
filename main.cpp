@@ -1,12 +1,8 @@
 #include <iostream>
 #include <string>
-#include "Parser/Parser.h"
-#include "Parser/ArtistParser.h"
-#include "HeaderFiles/TrackHashTable.h"
-#include "HeaderFiles/ArtistHashTable.h"
-
+#include "Parser/Parser.cpp"
+#include "Parser/ArtistParser.cpp"
 using namespace std;
-
 int main()
 {
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
@@ -19,8 +15,8 @@ int main()
     cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
     cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
 
-    int key = TrackContainer->hashFunction("Comedy");
-    TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();
+    // int key = TrackContainer->hashFunction("Comedy");
+    // TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();
     // std::ofstream outfile;      // Create ofstream object
     // outfile.open("output.txt"); // Open file
 
