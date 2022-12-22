@@ -79,10 +79,13 @@ public:
     bool operator>=(Artist RHS){
         return name>=RHS.name;
     }
-    Artist()
-    {
-        this->name = "";
-        SongsList = NULL;
+    bool operator==(Artist RHS){
+        return name==RHS.name;
     }
 };
+ostream & operator<<(ostream & ost,Artist ll){
+    ost<<ll.name;
+    return ost;
+}
+
 #endif // ARTISTHEADER

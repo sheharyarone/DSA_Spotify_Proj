@@ -83,6 +83,15 @@ public:
         return t;
     };
 
+    bool Search(node *r,T x){
+        if(r==nullptr)
+            return false;
+        if(r->d==x)
+            return true;
+        Search(r->l,x);
+        Search(r->r,x);
+    }
+
     node * insert(node *r,T v){
 
         if (r == NULL) {
@@ -90,11 +99,12 @@ public:
             r->d = v;
             r->l = NULL;
             r->r = NULL;
+            root = r;
             return r;
         }
-        else if(v==r->d){
-            return nullptr;
-        }
+        //else if(v==r->d){
+          //  return nullptr;
+
         else if (v< r->d) {
             r->l = insert(r->l, v);
             r = balance(r);
@@ -102,6 +112,13 @@ public:
             r->r = insert(r->r, v);
             r = balance(r);
         } return r;
+    }
+    void inorderPrint(node *t) {
+        if (t == NULL)
+            return;
+        inorderPrint(t->l);
+        cout << t->d << " ";
+        inorderPrint(t->r);
     }
 
     /*void show(node*, int);
@@ -148,14 +165,9 @@ void avl_tree<T>::show(node *p, int l) {
         show(p->l, l + 1);
     }
 }
-template <class T>
-void avl_tree<T>::inorder(node *t) {
-    if (t == NULL)
-        return;
-    inorder(t->l);
-    cout << t->d << " ";
-    inorder(t->r);
-}
+ ?\*/
+
+/*
 template <class T>
 void avl_tree<T>::preorder(node *t) {
     if (t == NULL)
