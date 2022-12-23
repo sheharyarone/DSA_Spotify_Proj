@@ -60,7 +60,7 @@ bool ArtistLinkList::findInList(string name_)
     }
     return false;
 }
-Artist *ArtistLinkList::GetArtistPointerFromList(string name,Track *trackPointerToAdd)
+Artist *ArtistLinkList::GetArtistPointerFromList(string name, Track *trackPointerToAdd)
 {
     // IF FOUND RETURNS TRUE
     // FALSE OTHERWISE
@@ -144,6 +144,7 @@ ArtistHashTable::~ArtistHashTable()
 }
 string ArtistHashTable::getHeadArtistName(int hashFunctionKey)
 {
+    // cout << (hashTableArr[hashFunctionKey]->headArtist->ArtistPointer->name);
     return (hashTableArr[hashFunctionKey]->headArtist->ArtistPointer->name);
 }
 // GET ARTIST POINTER AND IT WILL BE THERE
@@ -153,11 +154,13 @@ Artist *ArtistHashTable::GetArtistPointer(string name, Track *trackPointerToAdd)
     if (getHeadArtistName(key) == name)
     {
         hashTableArr[key]->headArtist->ArtistPointer->trackHandler(trackPointerToAdd);
+        // cout << "ARTSIST MEI TRACK DAL GYA HY" << endl;
         return hashTableArr[key]->headArtist->ArtistPointer;
     }
     else
     {
-        return hashTableArr[key]->GetArtistPointerFromList(name,trackPointerToAdd);
+        // cout << "else case" << endl;
+        return hashTableArr[key]->GetArtistPointerFromList(name, trackPointerToAdd);
     }
 }
 bool ArtistHashTable::isAvailable(int ExistOn)

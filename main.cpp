@@ -11,16 +11,13 @@ int main()
     cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
     cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
 
-    // int key = ArtistContainer->hashFunction("Colbie Caillat");
-    // ArtistContainer->hashTableArr[key]->displayAll();
-
     TrackHashTable *TrackContainer = new TrackHashTable(82109);
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer);
     cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
     cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
 
-    // int key = ArtistContainer->hashFunction("Brandi Carlile");
-    // cout << ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->SongsList;
+    // int key = TrackContainer->hashFunction("93 Million Miles");
+    // cout << TrackContainer->hashTableArr[key]->head->TrackPointer->ArtistsOfTrack->head->object->SongsList->head->next->object->Title << endl;
 
     // int key = TrackContainer->hashFunction("Comedy");
     // TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();

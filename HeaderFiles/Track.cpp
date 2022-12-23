@@ -8,70 +8,10 @@
 
 using namespace std;
 
-ArtistInTrackNode::ArtistInTrackNode()
-{
-    ArtistPointer = NULL;
-    next = NULL;
-}
-ArtistInTrackNode::ArtistInTrackNode(Artist *ArtistPointer)
-{
-    this->ArtistPointer = ArtistPointer;
-    next = NULL;
-}
-ArtistsForTrack::ArtistsForTrack()
-{
-    headArtist = NULL;
-}
-ArtistsForTrack::ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer, Track *trackPointer)
-{
-    if (!AreThereManyArtists(allArtistNames))
-    {
-        // cout << "ADDING ARTIST NAME IN TRACK : " << allArtistNames << endl;
-        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(allArtistNames, trackPointer));
-    }
-    else
-    {
-        int noOfArtist = countArtists(allArtistNames);
-        string *arrayOfArtistNames = SeperatingArtist(allArtistNames, noOfArtist);
-        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(arrayOfArtistNames[0], trackPointer));
-        for (int i = 1; i < noOfArtist; i++)
-        {
-            // cout << "ADDING ARTIST NAME IN TRACK : " << arrayOfArtistNames[i] << endl;
-            addArtistInList(arrayOfArtistNames[i], ArtistContainer, trackPointer);
-        }
-    }
-}
-void ArtistsForTrack::addArtistInList(string name, ArtistHashTable *ArtistContainer, Track *trackPointer)
-{
-    ArtistInTrackNode *temp = headArtist;
-    while (temp->next != NULL)
-    {
-        temp = temp->next;
-    }
-    temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name, trackPointer));
-}
-void ArtistsForTrack::displayAll()
-{
-    if (headArtist == NULL)
-    {
-        cout << "linked list is empty" << endl;
-        return;
-    }
-    cout << endl
-         << "----link list items------" << endl;
-    ArtistInTrackNode *temp = headArtist;
-    while (temp != NULL)
-    {
-        cout << temp->ArtistPointer->name << " | ";
-        temp = temp->next;
-    }
-    cout << endl
-         << "--------------------------" << endl;
-}
 Track::Track()
 {
     Title = "";
-    Artists = NULL;
+    ArtistsOfTrack = NULL;
     Duration = 0;
     Explicit = 0;
     Dancebility = 0;
@@ -87,13 +27,11 @@ Track::Track()
     Tempo = 0;
     TimeSignature = 0;
 }
-
 Track::Track(string *array, ArtistHashTable *ArtistContainer)
 {
     Title = array[1];
-    // cout << "TITLE : " << Title << endl;
-    Artists = new ArtistsForTrack(array[0], ArtistContainer, this);
-
+    ArtistsOfTrack = new LinkedList_<Artist>;
+    addArtistInList(array[0], ArtistContainer, this);
     // Genre = NULL;
     // Playlist = NULL;
     Duration = stoi(array[2]);
@@ -114,4 +52,21 @@ Track::Track(string *array, ArtistHashTable *ArtistContainer)
 bool Track::operator==(Track test_)
 {
     return (this->Title == test_.Title);
+}
+void Track::addArtistInList(string allArtistNames, ArtistHashTable *ArtistContainer, Track *trackPointer)
+{
+    if (!AreThereManyArtists(allArtistNames))
+    {
+        // cout << "ADDING ARTIST NAME IN TRACK : " << allArtistNames << endl;
+        ArtistsOfTrack->ADD(ArtistContainer->GetArtistPointer(allArtistNames, trackPointer));
+    }
+    else
+    {
+        int noOfArtist = countArtists(allArtistNames);
+        string *arrayOfArtistNames = SeperatingArtist(allArtistNames, noOfArtist);
+        for (int i = 0; i < noOfArtist; i++)
+        {
+            ArtistsOfTrack->ADD(ArtistContainer->GetArtistPointer(arrayOfArtistNames[i], trackPointer));
+        }
+    }
 }

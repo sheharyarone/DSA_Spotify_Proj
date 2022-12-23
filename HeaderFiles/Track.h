@@ -1,31 +1,14 @@
 #pragma once
 #include "Artist.cpp"
+#include "../Template/LinkedList.h"
 // FORWARD DECLARATION
 class ArtistHashTable;
-
-class ArtistInTrackNode
-{
-public:
-    Artist *ArtistPointer;
-    ArtistInTrackNode *next;
-    ArtistInTrackNode();
-    ArtistInTrackNode(Artist *);
-};
-class ArtistsForTrack
-{
-public:
-    ArtistInTrackNode *headArtist;
-    ArtistsForTrack();
-    ArtistsForTrack(std::string, ArtistHashTable *, Track *);
-    void addArtistInList(std::string, ArtistHashTable *, Track *);
-    void displayAll();
-};
 
 class Track
 {
 public:
     std::string Title;
-    ArtistsForTrack *Artists;
+    LinkedList_<Artist> *ArtistsOfTrack;
     // singlyNode<string> *Genre;
     // singlyNode<string> *Playlist;
     int Duration;
@@ -46,4 +29,5 @@ public:
     Track();
     Track(std::string *, ArtistHashTable *);
     bool operator==(Track test);
+    void addArtistInList(string, ArtistHashTable *, Track *);
 };
