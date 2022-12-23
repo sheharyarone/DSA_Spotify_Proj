@@ -4,90 +4,129 @@
 
 #ifndef DSA_SPOTIFY_PROJ_LINKEDLIST_H
 #define DSA_SPOTIFY_PROJ_LINKEDLIST_H
-#include<iostream>
+#include <iostream>
 using namespace std;
 template <class T>
-class Node{
+class Node
+{
 public:
-    T * object;
-    Node<T> * next;
-    Node(){
-        T*thing=new T();
+    T *object;
+    Node<T> *next;
+    Node()
+    {
+        object = nullptr;
+        next = nullptr;
     }
-    Node(T * thing){
-        thing= new T();
+    Node(T *thing)
+    {
+        object = thing;
+        next = nullptr;
     }
 };
 template <class T>
-class LinkedList {
+class LinkedList_
+{
 public:
     Node<T> *head;
-    int colliosions;
-    LinkedList(){
-        head=new Node<T>();
-        head->next==nullptr;
-        colliosions=0;
+    int collisions;
+    LinkedList_()
+    {
+        head = nullptr;
+        collisions = 0;
     }
-    void ADD(T * addditem){
-        Node<T> *newitem=new Node<T>(addditem);
-        colliosions++;
-        Node<T> *temp=head;
-        while(temp->next!=nullptr){
-            temp=temp->next;
+    LinkedList_(T *newthing)
+    {
+        head = new Node<T>(newthing);
+        head->next = nullptr;
+        collisions = 0;
+    }
+    void ADD(T *additem)
+    {
+        // if (!SearchItem(additem))
+        // {
+        Node<T> *newitem = new Node<T>(additem);
+        collisions++;
+        if (head == nullptr)
+        {
+            head = newitem;
+            // return;
         }
-        temp->next=newitem;
-        //delete temp;//Comment this out if code not working.
+        else
+        {
+            Node<T> *temp = head;
+            while (temp->next != nullptr)
+            {
+                temp = temp->next;
+            }
+            temp->next = newitem;
+            // return;
+        }
+        // }
+        // else
+        //     return;
+
+        // delete temp;//Comment this out if code not working.
     }
-    bool SearchItem(T * SearchItem) {
+    bool SearchItem(T *SearchItem)
+    {
         Node<T> *helper = head;
-        while (helper != nullptr) {
-            if (*(SearchItem) == *(helper->object))//operator overloading in individual classes.
+        while (helper != nullptr)
+        {
+            if (*(SearchItem) == *(helper->object))
+            { // operator overloading in individual classes.
                 return true;
+            }
             helper = helper->next;
         }
         return false;
     }
-    Node<T> GetPointerObject(T * SearchItem){
-        Node<T> *helper=head;
-        while(helper!=nullptr){
-            if(*(SearchItem)==*(helper->object))
+    Node<T> GetPointerObject(T *SearchItem)
+    {
+        Node<T> *helper = head;
+        while (helper != nullptr)
+        {
+            if (*(SearchItem) == *(helper->object))
                 return helper;
-            helper=helper->next;
+            helper = helper->next;
         }
-        return nullptr;//If nullptr returned it means object not found.
+        return nullptr; // If nullptr returned it means object not found.
     }
-    void Displayall(){
-        Node<T> *temp=head;
-        while(temp!=nullptr){
-            cout<<*(temp)<<endl;
-            temp=temp->next;
+    void Displayall()
+    {
+        Node<T> *temp = head;
+        while (temp != nullptr)
+        {
+            cout << *(temp) << endl;
+            temp = temp->next;
         }
     }
-    void DeleteNode(T * DeleteObject){
-        if(SearchItem(DeleteObject)){
+    void DeleteNode(T *DeleteObject)
+    {
+        if (SearchItem(DeleteObject))
+        {
 
-            if(*(DeleteObject)==*(head)){
-                Node<T> *item=head;
-                head=head->next;
+            if (*(DeleteObject) == *(head))
+            {
+                Node<T> *item = head;
+                head = head->next;
                 delete item;
-
             }
-            else{
-                Node<T> *item=head;
+            else
+            {
+                Node<T> *item = head;
                 Node<T> *previtem;
-                while(item!=nullptr && (*(DeleteObject)!=*(item))){
-                    previtem=item;
-                    item=item->next;
+                while (item != nullptr && (*(DeleteObject) != *(item)))
+                {
+                    previtem = item;
+                    item = item->next;
                 }
-                previtem->next=item->next;
+                previtem->next = item->next;
                 delete item;
             }
         }
-        else return;
+        else
+            return;
     }
-
-
 };
 
-
-#endif //DSA_SPOTIFY_PROJ_LINKEDLIST_H
+#endif // DSA_SPOTIFY_PROJ_LINKEDLIST_H

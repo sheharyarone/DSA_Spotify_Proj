@@ -45,4 +45,5 @@ public:
 
     Track();
     Track(std::string *, ArtistHashTable *);
+    bool operator==(Track test);
 };

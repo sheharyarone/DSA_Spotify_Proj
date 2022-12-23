@@ -5,18 +5,22 @@
 using namespace std;
 int main()
 {
+
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
     parseArtistCSV("DataSet/ArtistNames.csv", ArtistContainer);
     cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
     cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
 
-    TrackHashTable *TrackContainer = new TrackHashTable(81109);
+    // int key = ArtistContainer->hashFunction("Colbie Caillat");
+    // ArtistContainer->hashTableArr[key]->displayAll();
+
+    TrackHashTable *TrackContainer = new TrackHashTable(82109);
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer);
     cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
     cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
 
-    int key = ArtistContainer->hashFunction("Brandi Carlile");
-    ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->SongsList->displayAll();
+    // int key = ArtistContainer->hashFunction("Brandi Carlile");
+    // cout << ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->SongsList;
 
     // int key = TrackContainer->hashFunction("Comedy");
     // TrackContainer->hashTableArr[key]->head->TrackPointer->Artists->displayAll();

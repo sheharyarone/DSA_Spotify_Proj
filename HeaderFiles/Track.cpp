@@ -22,31 +22,33 @@ ArtistsForTrack::ArtistsForTrack()
 {
     headArtist = NULL;
 }
-ArtistsForTrack::ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer,Track *trackPointer)
+ArtistsForTrack::ArtistsForTrack(string allArtistNames, ArtistHashTable *ArtistContainer, Track *trackPointer)
 {
     if (!AreThereManyArtists(allArtistNames))
     {
-        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(allArtistNames,trackPointer));
+        // cout << "ADDING ARTIST NAME IN TRACK : " << allArtistNames << endl;
+        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(allArtistNames, trackPointer));
     }
     else
     {
         int noOfArtist = countArtists(allArtistNames);
         string *arrayOfArtistNames = SeperatingArtist(allArtistNames, noOfArtist);
-        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(arrayOfArtistNames[0],trackPointer));
+        headArtist = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(arrayOfArtistNames[0], trackPointer));
         for (int i = 1; i < noOfArtist; i++)
         {
-            addArtistInList(arrayOfArtistNames[i], ArtistContainer,trackPointer);
+            // cout << "ADDING ARTIST NAME IN TRACK : " << arrayOfArtistNames[i] << endl;
+            addArtistInList(arrayOfArtistNames[i], ArtistContainer, trackPointer);
         }
     }
 }
-void ArtistsForTrack::addArtistInList(string name, ArtistHashTable *ArtistContainer,Track *trackPointer)
+void ArtistsForTrack::addArtistInList(string name, ArtistHashTable *ArtistContainer, Track *trackPointer)
 {
     ArtistInTrackNode *temp = headArtist;
     while (temp->next != NULL)
     {
         temp = temp->next;
     }
-    temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name,trackPointer));
+    temp->next = new ArtistInTrackNode(ArtistContainer->GetArtistPointer(name, trackPointer));
 }
 void ArtistsForTrack::displayAll()
 {
@@ -89,7 +91,9 @@ Track::Track()
 Track::Track(string *array, ArtistHashTable *ArtistContainer)
 {
     Title = array[1];
-    Artists = new ArtistsForTrack(array[0], ArtistContainer,this);
+    // cout << "TITLE : " << Title << endl;
+    Artists = new ArtistsForTrack(array[0], ArtistContainer, this);
+
     // Genre = NULL;
     // Playlist = NULL;
     Duration = stoi(array[2]);
@@ -106,4 +110,8 @@ Track::Track(string *array, ArtistHashTable *ArtistContainer)
     Valence = stof(array[13]);
     Tempo = stof(array[14]);
     TimeSignature = stoi(array[15]);
+}
+bool Track::operator==(Track test_)
+{
+    return (this->Title == test_.Title);
 }
