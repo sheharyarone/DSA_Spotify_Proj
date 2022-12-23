@@ -42,29 +42,24 @@ public:
     }
     void ADD(T *additem)
     {
-        // if (!SearchItem(additem))
-        // {
-        Node<T> *newitem = new Node<T>(additem);
-        collisions++;
-        if (head == nullptr)
+        if (!SearchItem(additem))
         {
-            head = newitem;
-            // return;
-        }
-        else
-        {
-            Node<T> *temp = head;
-            while (temp->next != nullptr)
+            Node<T> *newitem = new Node<T>(additem);
+            collisions++;
+            if (head == nullptr)
             {
-                temp = temp->next;
+                head = newitem;
             }
-            temp->next = newitem;
-            // return;
+            else
+            {
+                Node<T> *temp = head;
+                while (temp->next != nullptr)
+                {
+                    temp = temp->next;
+                }
+                temp->next = newitem;
+            }
         }
-        // }
-        // else
-        //     return;
-
         // delete temp;//Comment this out if code not working.
     }
     bool SearchItem(T *SearchItem)
