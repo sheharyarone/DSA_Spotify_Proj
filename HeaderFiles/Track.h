@@ -29,5 +29,5 @@ public:
     Track();
     Track(std::string *, ArtistHashTable *);
     bool operator==(Track test);
-    void addArtistInList(string, ArtistHashTable *, Track *);
+    void assigningArtistPointersToTrackClass(string, ArtistHashTable *, Track *);
 };

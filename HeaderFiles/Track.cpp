@@ -31,7 +31,7 @@ Track::Track(string *array, ArtistHashTable *ArtistContainer)
 {
     Title = array[1];
     ArtistsOfTrack = new LinkedList_<Artist>;
-    addArtistInList(array[0], ArtistContainer, this);
+    assigningArtistPointersToTrackClass(array[0], ArtistContainer, this);
     // Genre = NULL;
     // Playlist = NULL;
     Duration = stoi(array[2]);
@@ -53,12 +53,12 @@ bool Track::operator==(Track test_)
 {
     return (this->Title == test_.Title);
 }
-void Track::addArtistInList(string allArtistNames, ArtistHashTable *ArtistContainer, Track *trackPointer)
+void Track::assigningArtistPointersToTrackClass(string allArtistNames, ArtistHashTable *ArtistContainer, Track *trackPointer)
 {
     if (!AreThereManyArtists(allArtistNames))
     {
-        // cout << "ADDING ARTIST NAME IN TRACK : " << allArtistNames << endl;
-        ArtistsOfTrack->ADD(ArtistContainer->GetArtistPointer(allArtistNames, trackPointer));
+        Artist *addPlz = ArtistContainer->GetArtistPointer(allArtistNames, trackPointer);
+        ArtistsOfTrack->ADD(addPlz);
     }
     else
     {
