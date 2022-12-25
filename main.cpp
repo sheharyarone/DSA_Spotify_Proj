@@ -1,20 +1,23 @@
 #include <iostream>
 #include <string>
 #include "Parser/Parser.cpp"
-#include "Parser/ArtistParser.cpp"
 using namespace std;
 int main()
 {
 
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
     parseArtistCSV("DataSet/ArtistNames.csv", ArtistContainer);
-    cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
-    cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
+//    cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
+//    cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
 
+    AVLTree<Genre> *GenreContainer = new AVLTree<Genre>;
+    parseGenreCSV("DataSet/Genre.csv", GenreContainer);
+    Genre *pointer = GenreContainer->Search("cantopop");
+    cout << pointer->name << endl;
     TrackHashTable *TrackContainer = new TrackHashTable(82109);
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer);
-    cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
-    cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
+//    cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
+//    cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
 
     // int key = TrackContainer->hashFunction("93 Million Miles");
     // cout << TrackContainer->hashTableArr[key]->head->TrackPointer->ArtistsOfTrack->head->object->SongsList->head->next->object->Title << endl;

@@ -1,12 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Artist.cpp"
+#include "Artist.h"
 #include "ArtistHashTable.h"
 using namespace std;
 
-int noOfArtist = 0;
-int noOfCollisionsInArtist = 0;
 
 ArtistNode::ArtistNode()
 {
@@ -30,7 +28,6 @@ ArtistLinkList::ArtistLinkList(string name)
 }
 void ArtistLinkList::addArtistInList(string name)
 {
-    noOfCollisionsInArtist++;
     collisions++;
     ArtistNode *node = new ArtistNode(name);
     if (headArtist == NULL)
@@ -199,12 +196,10 @@ void ArtistHashTable::hashStore(string name)
     int key = hashFunction(name);
     if (isAvailable(key))
     {
-        noOfArtist++;
         hashTableArr[key] = new ArtistLinkList(name);
     }
     else if (!(hashTableArr[key]->findInList(name)))
     {
-        noOfArtist++;
         hashTableArr[key]->addArtistInList(name);
     }
 }

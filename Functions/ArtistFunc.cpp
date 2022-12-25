@@ -1,7 +1,7 @@
-#ifndef ARTISTFUNC
-#define ARTISTFUNC
+#pragma once
 #include <iostream>
 #include <string>
+#include "ArtistFunc.h"
 using namespace std;
 
 bool AreThereManyArtists(string s)
@@ -51,4 +51,3 @@ string *SeperatingArtist(string s, int noOfArtist)
     }
     return ArtistArr;
 }
-#endif

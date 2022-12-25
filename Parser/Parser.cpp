@@ -3,10 +3,33 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "../HeaderFiles/Genre.cpp"
+#include "../Template/AVLTree.h"
 #include "../HeaderFiles/TrackHashTable.cpp"
+#include "../Functions/ArtistFunc.cpp"
 #include "../HeaderFiles/ArtistHashTable.cpp"
 
+
 using namespace std;
+
+void parseGenreCSV(const string filename, AVLTree<Genre> *GenreContainer)
+{
+    ifstream file(filename);
+    string line;
+    int i = 0;
+    while (getline(file, line))
+    {
+        i++;
+        istringstream iss(line);
+        string field;
+        while (getline(iss, field, ','))
+        {
+            // SINGLE ARTIST CASE
+            Genre *pointer = new Genre(field);
+            GenreContainer->Insert(pointer);
+        }
+    }
+}
 
 void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHashTable *TrackContainer)
 {
@@ -46,10 +69,33 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
         delete[] fields;
     }
 }
+void parseArtistCSV(const string filename, ArtistHashTable *ArtistContainer)
+{
+    ifstream file(filename);
+    string line;
+    int i = 0;
+    while (getline(file, line))
+    {
+        i++;
+        istringstream iss(line);
+        string field;
+        while (getline(iss, field, ','))
+        {
+            // SINGLE ARTIST CASE
+            if (!AreThereManyArtists(field))
+            {
+                string *artistName = new string[1];
+                artistName[0] = field;
+                ArtistContainer->handler(artistName, 1);
+            }
+            else
+            {
+                int noOfArtist = countArtists(field);
+                string *arrayOfArtistNames = SeperatingArtist(field, noOfArtist);
+                ArtistContainer->handler(arrayOfArtistNames, noOfArtist);
+                delete[] arrayOfArtistNames;
+            }
+        }
+    }
+}
 
-// Artist node *returnFoundArtist(string name)
-// {
-//     // CALL HASH FUNCTION OF ARTIST AND FIND INDEX
-//     // IF THIS INDEX HAS AVL TREE TRAVERSE IT TO FIND THE NODE
-//     // RETURN THIS NODE
-// }

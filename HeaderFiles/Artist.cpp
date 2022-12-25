@@ -2,8 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Artist.h"
-#include "Track.h"
-#include "../Template/LinkedList.h"
+#include "Track.cpp"
 using namespace std;
 
 Artist::Artist()

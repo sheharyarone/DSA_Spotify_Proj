@@ -6,8 +6,6 @@
 #include "TrackHashTable.h"
 
 using namespace std;
-int noOfCollisionsInTracks = 0;
-int noOfUniqueSongs = 0;
 
 TrackNode::TrackNode() {}
 TrackNode::TrackNode(string *array, ArtistHashTable *ArtistContainer)
@@ -30,7 +28,6 @@ LinkedList::LinkedList(string *array, ArtistHashTable *ArtistContainer)
 void LinkedList::addTrackInList(string *array, ArtistHashTable *ArtistContainer)
 {
     collisions++;
-    noOfCollisionsInTracks++;
 
     TrackNode *node = new TrackNode(array, ArtistContainer);
     if (head == NULL)
@@ -168,13 +165,10 @@ void TrackHashTable::hashStore(string *arr, ArtistHashTable *ArtistContainer)
 
     if (isAvailable(key))
     {
-
-        noOfUniqueSongs++;
         hashTableArr[key] = new LinkedList(arr, ArtistContainer);
     }
     else if (!(hashTableArr[key]->findInList(arr[1])))
     {
-        noOfUniqueSongs++;
         hashTableArr[key]->addTrackInList(arr, ArtistContainer);
     }
 }

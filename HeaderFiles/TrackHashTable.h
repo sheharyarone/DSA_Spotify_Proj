@@ -1,6 +1,6 @@
 #pragma once
-#include "Track.h"
-#include "ArtistHashTable.h"
+#include "Track.cpp"
+#include "ArtistHashTable.cpp"
 class TrackNode
 {
 public:
@@ -30,6 +30,7 @@ class TrackHashTable
 public:
     int tablesize;
     LinkedList **hashTableArr;
+    TrackHashTable();
 
     TrackHashTable(int);
 

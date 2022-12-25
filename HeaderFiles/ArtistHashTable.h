@@ -29,7 +29,7 @@ class ArtistHashTable
 public:
     int tablesize;
     ArtistLinkList **hashTableArr;
-
+    ArtistHashTable();
     ArtistHashTable(int);
     ~ArtistHashTable();
     std::string getHeadArtistName(int hashFunctionKey);
