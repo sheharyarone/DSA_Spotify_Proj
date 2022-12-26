@@ -3,6 +3,7 @@
 #include <string>
 #include "Artist.cpp"
 #include "Track.h"
+#include "Genre.h"
 #include "../Functions/ArtistFunc.cpp"
 #include "ArtistHashTable.cpp"
 
@@ -11,6 +12,7 @@ using namespace std;
 Track::Track()
 {
     Title = "";
+    GenreOfTrack = NULL;
     ArtistsOfTrack = NULL;
     Duration = 0;
     Explicit = 0;
@@ -27,13 +29,20 @@ Track::Track()
     Tempo = 0;
     TimeSignature = 0;
 }
-Track::Track(string *array, ArtistHashTable *ArtistContainer)
+Track::Track(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
     Title = array[1];
     ArtistsOfTrack = new LinkedList_<Artist>;
     assigningArtistPointersToTrackClass(array[0], ArtistContainer, this);
-    // Genre = NULL;
-    // Playlist = NULL;
+
+    GenreOfTrack = new LinkedList_<Genre>;
+    // GETTING GENRE POINTER FROM ITS AVL TREE
+    Genre *pointerOfGenre = GenreContainer->Search(array[16]);
+    // ADDING GENRE IN TRACK
+    GenreOfTrack->ADD(pointerOfGenre);
+    // ADDING TRACK IN GENRE OBJECT LINKED LIST
+    pointerOfGenre->GenreTrackList->ADD(this);
+    
     Duration = stoi(array[2]);
     Explicit = stoi(array[3]);
     Dancebility = stof(array[4]);

@@ -9,7 +9,6 @@
 #include "../Functions/ArtistFunc.cpp"
 #include "../HeaderFiles/ArtistHashTable.cpp"
 
-
 using namespace std;
 
 void parseGenreCSV(const string filename, AVLTree<Genre> *GenreContainer)
@@ -31,7 +30,7 @@ void parseGenreCSV(const string filename, AVLTree<Genre> *GenreContainer)
     }
 }
 
-void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHashTable *TrackContainer)
+void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHashTable *TrackContainer, AVLTree<Genre> *GenreContainer)
 {
     ifstream file(filename);
     string line;
@@ -39,7 +38,7 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
     while (getline(file, line))
     {
         istringstream iss(line);
-        string *fields = new string[18];
+        string *fields = new string[17];
         string field;
         int i = 0;
         int j = 1;
@@ -51,7 +50,7 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
             {
                 break;
             }
-            if (j == 2 || j == 18)
+            if (j == 2)
             {
                 j++;
                 continue;
@@ -65,7 +64,7 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
             delete[] fields;
             continue;
         }
-        TrackContainer->handler(fields, 18, ArtistContainer);
+        TrackContainer->handler(fields, 17, ArtistContainer, GenreContainer);
         delete[] fields;
     }
 }
@@ -98,4 +97,3 @@ void parseArtistCSV(const string filename, ArtistHashTable *ArtistContainer)
         }
     }
 }
-

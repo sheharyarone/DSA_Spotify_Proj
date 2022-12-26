@@ -7,10 +7,14 @@
 
 using namespace std;
 
-TrackNode::TrackNode() {}
-TrackNode::TrackNode(string *array, ArtistHashTable *ArtistContainer)
+TrackNode::TrackNode()
 {
-    TrackPointer = new Track(array, ArtistContainer); // IDR HM ARRAY PASS KRA DEI GY OR 1 FUNCITON BNA DEI GY JO ARTIST KE POINTER UTHA KR LYE GA
+    TrackPointer = NULL;
+    next = NULL;
+}
+TrackNode::TrackNode(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
+{
+    TrackPointer = new Track(array, ArtistContainer, GenreContainer); // IDR HM ARRAY PASS KRA DEI GY OR 1 FUNCITON BNA DEI GY JO ARTIST KE POINTER UTHA KR LYE GA
     this->next = NULL;
 }
 LinkedList::LinkedList()
@@ -18,18 +22,18 @@ LinkedList::LinkedList()
     head = new TrackNode();
     collisions = 0;
 }
-LinkedList::LinkedList(string *array, ArtistHashTable *ArtistContainer)
+LinkedList::LinkedList(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
 
-    this->head = new TrackNode(array, ArtistContainer);
+    this->head = new TrackNode(array, ArtistContainer, GenreContainer);
     collisions = 0;
 }
 
-void LinkedList::addTrackInList(string *array, ArtistHashTable *ArtistContainer)
+void LinkedList::addTrackInList(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
     collisions++;
 
-    TrackNode *node = new TrackNode(array, ArtistContainer);
+    TrackNode *node = new TrackNode(array, ArtistContainer, GenreContainer);
     if (head == NULL)
     {
         head = node;
@@ -159,21 +163,21 @@ int TrackHashTable::hashFunction(string s)
     return (sum % tablesize);
 }
 
-void TrackHashTable::hashStore(string *arr, ArtistHashTable *ArtistContainer)
+void TrackHashTable::hashStore(string *arr, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
     int key = hashFunction(arr[1]);
 
     if (isAvailable(key))
     {
-        hashTableArr[key] = new LinkedList(arr, ArtistContainer);
+        hashTableArr[key] = new LinkedList(arr, ArtistContainer, GenreContainer);
     }
     else if (!(hashTableArr[key]->findInList(arr[1])))
     {
-        hashTableArr[key]->addTrackInList(arr, ArtistContainer);
+        hashTableArr[key]->addTrackInList(arr, ArtistContainer, GenreContainer);
     }
 }
 
-void TrackHashTable::handler(string *arr, int noOfTracks, ArtistHashTable *ArtistContainer)
+void TrackHashTable::handler(string *arr, int noOfTracks, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
-    hashStore(arr, ArtistContainer);
+    hashStore(arr, ArtistContainer, GenreContainer);
 }

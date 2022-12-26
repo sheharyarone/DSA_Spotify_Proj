@@ -1,4 +1,4 @@
-#pragma  once
+#pragma once
 #include <iostream>
 using namespace std;
 template <typename t>
@@ -35,10 +35,9 @@ public:
         PrintInorder(root_);
         std::cout << std::endl;
     }
-
-private:
     Node *root_;
 
+private:
     int GetHeight(Node *node)
     {
         return node ? node->height : 0;

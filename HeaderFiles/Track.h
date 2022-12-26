@@ -1,7 +1,12 @@
 #pragma once
+#include <iostream>
+#include <string>
 #include "Artist.cpp"
+#include "Genre.h"
 #include "../Template/LinkedList.h"
+#include "../Template/AVLTree.h"
 // FORWARD DECLARATION
+using namespace std;
 class ArtistHashTable;
 
 class Track
@@ -9,8 +14,7 @@ class Track
 public:
     std::string Title;
     LinkedList_<Artist> *ArtistsOfTrack;
-    // singlyNode<string> *Genre;
-    // singlyNode<string> *Playlist;
+    LinkedList_<Genre> *GenreOfTrack;
     int Duration;
     bool Explicit;
     float Dancebility;
@@ -27,7 +31,7 @@ public:
     int TimeSignature;
 
     Track();
-    Track(std::string *, ArtistHashTable *);
+    Track(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer);
     bool operator==(Track test);
     void assigningArtistPointersToTrackClass(string, ArtistHashTable *, Track *);
 };
