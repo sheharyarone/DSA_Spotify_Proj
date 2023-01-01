@@ -79,6 +79,19 @@ void LinkedList::displayAll()
     cout << endl
          << "--------------------------" << endl;
 }
+Track *LinkedList::getTrackPointer(string name)
+{
+    TrackNode *temp = head;
+    while (temp != NULL)
+    {
+        if (name == temp->TrackPointer->Title)
+        {
+            return temp->TrackPointer;
+        }
+        temp = temp->next;
+    }
+    return nullptr;
+}
 void LinkedList::deleteNode(string name)
 {
     // If the list is empty, there is nothing to delete
@@ -174,6 +187,15 @@ void TrackHashTable::hashStore(string *arr, ArtistHashTable *ArtistContainer, AV
     else if (!(hashTableArr[key]->findInList(arr[1])))
     {
         hashTableArr[key]->addTrackInList(arr, ArtistContainer, GenreContainer);
+    }
+    else
+    {
+        Track *GenreAddReq = hashTableArr[key]->getTrackPointer(arr[1]);
+        Genre *pointerOfGenre = GenreContainer->Search(arr[16]);
+        // ADDING GENRE IN TRACK
+        GenreAddReq->GenreOfTrack->ADD(pointerOfGenre);
+        // ADDING TRACK IN GENRE OBJECT LINKED LIST
+        pointerOfGenre->GenreTrackList->ADD(GenreAddReq);
     }
 }
 

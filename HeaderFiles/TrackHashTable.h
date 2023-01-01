@@ -22,7 +22,7 @@ public:
 
     bool findInList(std::string);
     void displayAll();
-
+    Track *getTrackPointer(string);
     void deleteNode(std::string);
 };
 class TrackHashTable
@@ -39,6 +39,7 @@ public:
     bool isAvailable(int);
 
     int computePower(int, int);
+
     int hashFunction(std::string);
 
     void hashStore(std::string *, ArtistHashTable *, AVLTree<Genre> *);

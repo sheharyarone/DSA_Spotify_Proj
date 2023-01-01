@@ -42,7 +42,7 @@ Track::Track(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *Ge
     GenreOfTrack->ADD(pointerOfGenre);
     // ADDING TRACK IN GENRE OBJECT LINKED LIST
     pointerOfGenre->GenreTrackList->ADD(this);
-    
+
     Duration = stoi(array[2]);
     Explicit = stoi(array[3]);
     Dancebility = stof(array[4]);

@@ -20,7 +20,7 @@ int main()
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer, GenreContainer);
     cout << "TRACKS HASHTABLE SET" << endl;
 
-    cout << "STARTING GRAPHS :" << endl;
+    
 
     return 0;
 }

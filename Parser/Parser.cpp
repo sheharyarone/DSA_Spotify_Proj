@@ -41,7 +41,6 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
         string *fields = new string[17];
         string field;
         int i = 0;
-        int j = 1;
         bool firstLine = true;
         // FOR SINGLE COLUMN
         while (getline(iss, field, ','))
@@ -50,14 +49,8 @@ void parseCSV(const string filename, ArtistHashTable *ArtistContainer, TrackHash
             {
                 break;
             }
-            if (j == 2)
-            {
-                j++;
-                continue;
-            }
             fields[i] = field;
             i++;
-            j++;
         }
         if (field == "artists")
         {
