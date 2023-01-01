@@ -4,6 +4,7 @@
 #include "Artist.cpp"
 #include "../Template/LinkedList.h"
 #include "ArtistHashTable.cpp"
+#include "TrackHashTable.cpp"
 using namespace std;
 
 class Edge
@@ -15,6 +16,7 @@ public:
 
     Edge();
     Edge(Artist *, Artist *);
+    bool operator==(Edge test);
 };
 
 class PointerToEdge
@@ -30,8 +32,8 @@ class EdgeLinkedList
 public:
     PointerToEdge *head;
 
-    EdgeLinkedList()
-    {
-        head = nullptr;
-    }
+    EdgeLinkedList();
+    void addTrackToEdge(Artist *, Artist *, EdgeLinkedList *, Track *);
+    void createGraph(TrackHashTable *, EdgeLinkedList *);
+    void printEdges();
 };
