@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Parser/Parser.cpp"
+#include "HeaderFiles/Graph.cpp"
 using namespace std;
 
 int main()
@@ -19,6 +20,11 @@ int main()
     TrackHashTable *TrackContainer = new TrackHashTable(82109);
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer, GenreContainer);
     cout << "TRACKS HASHTABLE SET" << endl;
+
+    EdgeLinkedList* EdgesContainer= new EdgeLinkedList();
+    EdgesContainer->createGraph(TrackContainer,EdgesContainer);
+
+    EdgesContainer->printEdges();
 
     
 
