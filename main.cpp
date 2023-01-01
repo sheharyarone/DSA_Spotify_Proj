@@ -9,8 +9,7 @@ int main()
 
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
     parseArtistCSV("DataSet/ArtistNames.csv", ArtistContainer);
-    //    cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
-    //    cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
+
     cout << "ARTIST CONTAINER SET" << endl;
     AVLTree<Genre> *GenreContainer = new AVLTree<Genre>;
     parseGenreCSV("DataSet/Genre.csv", GenreContainer);
@@ -21,12 +20,10 @@ int main()
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer, GenreContainer);
     cout << "TRACKS HASHTABLE SET" << endl;
 
-    EdgeLinkedList* EdgesContainer= new EdgeLinkedList();
-    EdgesContainer->createGraph(TrackContainer,EdgesContainer);
+    EdgeLinkedList *EdgesContainer = new EdgeLinkedList();
 
+    EdgesContainer->createGraph(TrackContainer, EdgesContainer);
     EdgesContainer->printEdges();
-
-    
 
     return 0;
 }

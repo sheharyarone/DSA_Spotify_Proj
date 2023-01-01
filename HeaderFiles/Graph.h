@@ -31,6 +31,7 @@ class EdgeLinkedList
 {
 public:
     PointerToEdge *head;
+    int noOfEdges;
 
     EdgeLinkedList();
     void addTrackToEdge(Artist *, Artist *, EdgeLinkedList *, Track *);
