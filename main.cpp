@@ -4,9 +4,24 @@
 #include "HeaderFiles/Graph.cpp"
 using namespace std;
 
+//new function. prints all artists songs
+void printArtistDetails(ArtistHashTable* table){
+    string artistname;
+    cout<<"Enter artist name: ";
+    getline(cin,artistname);
+    cout<<endl;
+    Artist* temp=table->ReturnArtistNode(artistname);
+    Node<Track> * temp1=temp->SongsList->head;
+    cout<<"Artist Name: "<<artistname<<endl<<"Songs list:"<<endl<<endl;
+    while(temp1!=nullptr){
+        cout<<temp1->object->Title<<endl;
+        temp1=temp1->next;
+    }
+    cout<<endl;
+}
+
 int main()
 {
-
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
     parseArtistCSV("DataSet/ArtistNames.csv", ArtistContainer);
 
@@ -24,6 +39,8 @@ int main()
 
     EdgesContainer->createGraph(TrackContainer, EdgesContainer);
     EdgesContainer->printEdges();
+
+    //printArtistDetails(ArtistContainer);
 
     return 0;
 }
