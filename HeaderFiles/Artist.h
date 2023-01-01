@@ -7,32 +7,26 @@ class Edge;
 class Track;
 class TrackHashTable;
 
-class nodeF
+class nodeCollab
 {
 public:
     Edge *object;
-    nodeF *next;
-    explicit nodeF(Edge *val)
+    nodeCollab *next;
+    explicit nodeCollab(Edge *val)
     {
         object = val;
         next = nullptr;
     }
 };
 
-class linkedListEdge
+class CollabLinkedList
 {
 public:
-    nodeF *head;
-    nodeF *tail;
-    nodeF *ploc;
-    nodeF *loc;
+    nodeCollab *head;
 
-    linkedListEdge()
+    CollabLinkedList()
     {
         head = nullptr;
-        tail = nullptr;
-        ploc = nullptr;
-        loc = nullptr;
     }
 
     bool isempty() const
@@ -42,7 +36,7 @@ public:
 
     int length() const
     {
-        nodeF *temp = head;
+        nodeCollab *temp = head;
         int n = 0;
 
         while (temp != nullptr)
@@ -55,11 +49,10 @@ public:
 
     void ADD(Edge *val)
     {
-        nodeF *newnode = new nodeF(val);
+        nodeCollab *newnode = new nodeCollab(val);
         if (isempty())
         {
             head = newnode;
-            tail = newnode;
         }
         else
         {
@@ -69,7 +62,7 @@ public:
     }
     void printll() const
     {
-        nodeF *temp = head;
+        nodeCollab *temp = head;
         while (temp != nullptr)
         {
             cout << temp->object << " ";
@@ -84,7 +77,7 @@ class Artist
 public:
     std::string name;
     LinkedList_<Track> *SongsList;
-    linkedListEdge *CollabList;
+    CollabLinkedList *CollabList;
     // FROM NXT NODE WE WILL SEE ALL THE TRACKS
     Artist();
     Artist(std::string);

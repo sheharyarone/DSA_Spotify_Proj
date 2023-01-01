@@ -71,7 +71,6 @@ void EdgeLinkedList::addTrackToEdge(Artist *a1, Artist *a2, Track *toAdd)
 
 void EdgeLinkedList::createGraph(TrackHashTable *h1)
 {
-    // this pointer will store head of linked list of tracks from hash table where it is found.
     TrackNode *trackNodeTemp;
     // loop iterating over track hash indexes.
     for (int i = 0; i < h1->tablesize; i++)
@@ -80,7 +79,6 @@ void EdgeLinkedList::createGraph(TrackHashTable *h1)
             continue;
         // if list is found assign head
         trackNodeTemp = h1->hashTableArr[i]->head; // LINKED LIST HEAD TRACK NODE
-        // h1->hashTableArr[i]->displayAll();
         while (trackNodeTemp != nullptr)
         { // now iterate through list and create edges
 
@@ -90,13 +88,10 @@ void EdgeLinkedList::createGraph(TrackHashTable *h1)
                 continue;
                 // no edge needed. only solo artist.
             }
-
             else
             {
                 Node<Artist> *artistTemp1 = trackNodeTemp->TrackPointer->ArtistsOfTrack->head;
-                // cout << artistTemp1->object->name << endl;
                 Node<Artist> *artistTemp2;
-
                 while (artistTemp1->next != nullptr)
                 {
                     artistTemp2 = artistTemp1->next;

@@ -44,7 +44,7 @@ int main()
     EdgesContainer->createGraph(TrackContainer);
     EdgesContainer->printEdges();
     int key = ArtistContainer->hashFunction("ZAYN");
-    nodeF *linkedListEdgeTraver = ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->CollabList->head;
+    nodeCollab *linkedListEdgeTraver = ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->CollabList->head;
     while (linkedListEdgeTraver != nullptr)
     {
         Edge *edge = linkedListEdgeTraver->object;
@@ -56,7 +56,6 @@ int main()
         }
         linkedListEdgeTraver = linkedListEdgeTraver->next;
     }
-
 
     return 0;
 }
