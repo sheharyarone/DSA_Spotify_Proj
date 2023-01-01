@@ -1,8 +1,8 @@
 #pragma once
 #include "../Template/LinkedList.h"
 // FORWARD DECLARATION
-class Track;
 class Edge;
+class Track;
 class TrackHashTable;
 
 class Artist
@@ -15,5 +15,6 @@ public:
     Artist();
     Artist(std::string);
     void trackHandler(Track *); // WILL BE CALLED BY ARTSITHASHTABLE FOR ADDING TRACK WHILE ITS CREATION
-    bool operator==(Artist test);
+    bool operator==(Artist);
+    bool friend Edge::operator==(Edge);
 };
