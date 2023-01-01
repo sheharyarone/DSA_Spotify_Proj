@@ -210,3 +210,13 @@ void ArtistHashTable::handler(string *arr, int noOfArtists)
         hashStore(arr[i]);
     }
 }
+
+//new function added by Aon. this will return artist node.
+Artist* ArtistHashTable::ReturnArtistNode(string artistname){
+    int key=hashFunction(artistname);
+    ArtistNode* temp=hashTableArr[key]->headArtist;
+    while ((temp->ArtistPointer->name!=artistname) && temp!=nullptr){
+        temp=temp->next;
+    }
+    return temp->ArtistPointer;
+}
