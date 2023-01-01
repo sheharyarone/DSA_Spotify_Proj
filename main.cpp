@@ -4,20 +4,24 @@
 #include "HeaderFiles/Graph.cpp"
 using namespace std;
 
-//new function. prints all artists songs
-void printArtistDetails(ArtistHashTable* table){
+// new function. prints all artists songs
+void printArtistDetails(ArtistHashTable *table)
+{
     string artistname;
-    cout<<"Enter artist name: ";
-    getline(cin,artistname);
-    cout<<endl;
-    Artist* temp=table->ReturnArtistNode(artistname);
-    Node<Track> * temp1=temp->SongsList->head;
-    cout<<"Artist Name: "<<artistname<<endl<<"Songs list:"<<endl<<endl;
-    while(temp1!=nullptr){
-        cout<<temp1->object->Title<<endl;
-        temp1=temp1->next;
+    cout << "Enter artist name: ";
+    getline(cin, artistname);
+    cout << endl;
+    Artist *temp = table->ReturnArtistNode(artistname);
+    Node<Track> *temp1 = temp->SongsList->head;
+    cout << "Artist Name: " << artistname << endl
+         << "Songs list:" << endl
+         << endl;
+    while (temp1 != nullptr)
+    {
+        cout << temp1->object->Title << endl;
+        temp1 = temp1->next;
     }
-    cout<<endl;
+    cout << endl;
 }
 
 int main()
@@ -37,10 +41,22 @@ int main()
 
     EdgeLinkedList *EdgesContainer = new EdgeLinkedList();
 
-    EdgesContainer->createGraph(TrackContainer, EdgesContainer);
+    EdgesContainer->createGraph(TrackContainer);
     EdgesContainer->printEdges();
+    int key = ArtistContainer->hashFunction("ZAYN");
+    nodeF *linkedListEdgeTraver = ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->CollabList->head;
+    while (linkedListEdgeTraver != nullptr)
+    {
+        Edge *edge = linkedListEdgeTraver->object;
+        Node<Track> *collabTrackNodeInEdge = edge->collabTracks->head;
+        while (collabTrackNodeInEdge != nullptr)
+        {
+            cout << collabTrackNodeInEdge->object->Title << endl;
+            collabTrackNodeInEdge = collabTrackNodeInEdge->next;
+        }
+        linkedListEdgeTraver = linkedListEdgeTraver->next;
+    }
 
-    //printArtistDetails(ArtistContainer);
 
     return 0;
 }

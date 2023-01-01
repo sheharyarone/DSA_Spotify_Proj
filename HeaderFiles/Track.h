@@ -34,4 +34,12 @@ public:
     Track(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer);
     bool operator==(Track test);
     void assigningArtistPointersToTrackClass(string, ArtistHashTable *, Track *);
+    bool operator<(Track test);
+    bool operator>(Track test);
+    
+    friend ostream &operator<<(ostream &out, const Track &obj)
+    {
+        out << obj.Title;
+        return out;
+    }
 };

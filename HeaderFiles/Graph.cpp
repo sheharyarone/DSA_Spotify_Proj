@@ -21,7 +21,11 @@ bool Edge::operator==(Edge test)
     return (this->artist1 == artist1 && this->artist2 == artist2) ||
            (this->artist1 == artist2 && this->artist2 == artist1);
 }
-
+PointerToEdge::PointerToEdge()
+{
+    edgePointer = nullptr;
+    next = nullptr;
+}
 PointerToEdge::PointerToEdge(Artist *a1, Artist *a2)
 {
     edgePointer = new Edge(a1, a2);
@@ -32,10 +36,10 @@ EdgeLinkedList::EdgeLinkedList()
     noOfEdges = 0;
     head = nullptr;
 }
-void EdgeLinkedList::addTrackToEdge(Artist *a1, Artist *a2, EdgeLinkedList *e1, Track *toAdd)
+void EdgeLinkedList::addTrackToEdge(Artist *a1, Artist *a2, Track *toAdd)
 {
-    PointerToEdge *temp = e1->head;
-    while (temp != nullptr && temp->next != nullptr)
+    PointerToEdge *temp = head;
+    while (temp != nullptr)
     {
         if ((temp->edgePointer->artist1 == a1 && temp->edgePointer->artist2 == a2) ||
             (temp->edgePointer->artist1 == a2 && temp->edgePointer->artist2 == a1))
@@ -43,16 +47,17 @@ void EdgeLinkedList::addTrackToEdge(Artist *a1, Artist *a2, EdgeLinkedList *e1, 
             temp->edgePointer->collabTracks->ADD(toAdd);
             return;
         }
-        if (temp->next != nullptr)
-            temp = temp->next;
+        if (temp->next == nullptr)
+            break;
+        temp = temp->next;
     }
     noOfEdges++;
     Edge *to_AddEdge;
     if (temp == nullptr)
     {
-        e1->head = new PointerToEdge(a1, a2);
-        e1->head->edgePointer->collabTracks->ADD(toAdd);
-        to_AddEdge = e1->head->edgePointer;
+        head = new PointerToEdge(a1, a2);
+        head->edgePointer->collabTracks->ADD(toAdd);
+        to_AddEdge = head->edgePointer;
     }
     else
     {
@@ -64,7 +69,7 @@ void EdgeLinkedList::addTrackToEdge(Artist *a1, Artist *a2, EdgeLinkedList *e1, 
     a2->CollabList->ADD(to_AddEdge);
 }
 
-void EdgeLinkedList::createGraph(TrackHashTable *h1, EdgeLinkedList *e1)
+void EdgeLinkedList::createGraph(TrackHashTable *h1)
 {
     // this pointer will store head of linked list of tracks from hash table where it is found.
     TrackNode *trackNodeTemp;
@@ -97,7 +102,7 @@ void EdgeLinkedList::createGraph(TrackHashTable *h1, EdgeLinkedList *e1)
                     artistTemp2 = artistTemp1->next;
                     while (artistTemp2 != nullptr)
                     {
-                        addTrackToEdge(artistTemp1->object, artistTemp2->object, e1, trackNodeTemp->TrackPointer);
+                        addTrackToEdge(artistTemp1->object, artistTemp2->object, trackNodeTemp->TrackPointer);
                         artistTemp2 = artistTemp2->next;
                     }
                     artistTemp1 = artistTemp1->next;
