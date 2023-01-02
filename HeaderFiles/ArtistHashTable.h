@@ -35,6 +35,9 @@ public:
     std::string getHeadArtistName(int hashFunctionKey);
     // GET ARTIST POINTER AND IT WILL BE THERE
     Artist *GetArtistPointer(std::string name, Track *);
+    
+    //new function add by AON.
+    Artist* ReturnArtistPointer(string);
     bool isAvailable(int ExistOn);
 
     int computePower(int value, int power);

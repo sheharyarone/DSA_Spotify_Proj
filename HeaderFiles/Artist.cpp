@@ -9,13 +9,13 @@ Artist::Artist()
 {
     this->name = "";
     SongsList = new LinkedList_<Track>;
-    CollabList = new LinkedList_<Edge>;
+    CollabList = new CollabLinkedList;
 }
 Artist::Artist(string name)
 {
     this->name = name;
     SongsList = new LinkedList_<Track>;
-    CollabList = new LinkedList_<Edge>;
+    CollabList = new CollabLinkedList;
 }
 void Artist::trackHandler(Track *toAddInList)
 {

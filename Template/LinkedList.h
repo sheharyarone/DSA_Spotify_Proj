@@ -12,6 +12,10 @@ class Node
 public:
     T *object;
     Node<T> *next;
+    bool operator==(Node<T> test)
+    {
+        return this->object == test.object;
+    }
     Node()
     {
         object = nullptr;
@@ -91,18 +95,19 @@ public:
         Node<T> *temp = head;
         while (temp != nullptr)
         {
-            cout << *(temp) << endl;
+            cout << *(temp->object) << endl;
             temp = temp->next;
         }
     }
     void DeleteNode(T *DeleteObject)
     {
+        Node<T> *item;
         if (SearchItem(DeleteObject))
         {
 
             if (*(DeleteObject) == *(head))
             {
-                Node<T> *item = head;
+                item = head;
                 head = head->next;
                 delete item;
             }

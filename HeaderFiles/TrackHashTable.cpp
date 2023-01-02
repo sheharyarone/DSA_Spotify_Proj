@@ -14,7 +14,7 @@ TrackNode::TrackNode()
 }
 TrackNode::TrackNode(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
-    TrackPointer = new Track(array, ArtistContainer, GenreContainer); // IDR HM ARRAY PASS KRA DEI GY OR 1 FUNCITON BNA DEI GY JO ARTIST KE POINTER UTHA KR LYE GA
+    TrackPointer = new Track(array, ArtistContainer, GenreContainer); 
     this->next = NULL;
 }
 LinkedList::LinkedList()

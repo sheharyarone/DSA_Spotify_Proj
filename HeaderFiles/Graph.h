@@ -24,6 +24,7 @@ class PointerToEdge
 public:
     Edge *edgePointer;
     PointerToEdge *next;
+    PointerToEdge();
     PointerToEdge(Artist *, Artist *);
 };
 
@@ -31,9 +32,10 @@ class EdgeLinkedList
 {
 public:
     PointerToEdge *head;
+    int noOfEdges;
 
     EdgeLinkedList();
-    void addTrackToEdge(Artist *, Artist *, EdgeLinkedList *, Track *);
-    void createGraph(TrackHashTable *, EdgeLinkedList *);
+    void addTrackToEdge(Artist *, Artist *, Track *);
+    void createGraph(TrackHashTable *);
     void printEdges();
 };
