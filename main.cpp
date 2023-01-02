@@ -161,7 +161,6 @@ void Coartist(string artist, ArtistHashTable *table1)
 
 void CheckIfCoartist(string artist1, string artist2, ArtistHashTable *table1)
 {
-    bool yes = false;
     LinkedList_<Track> *trackz = new LinkedList_<Track>;
     Artist *main = table1->ReturnArtistPointer(artist1);
     nodeCollab *edge = main->CollabList->head;
@@ -171,7 +170,6 @@ void CheckIfCoartist(string artist1, string artist2, ArtistHashTable *table1)
         if (edger->artist1->name == artist2 || edger->artist2->name == artist2)
         {
             cout << "Yes they are Coartists!" << endl;
-            yes = true;
             Node<Track> *trackx = edger->collabTracks->head;
             while (trackx != nullptr)
             {
@@ -179,14 +177,15 @@ void CheckIfCoartist(string artist1, string artist2, ArtistHashTable *table1)
                 trackz->ADD(realtrack);
                 trackx = trackx->next;
             }
+            trackz->Displayall();
+            break;
         }
         edge = edge->next;
     }
-    if (!yes)
+    if (trackz->head == nullptr)
     {
         cout << "No match!" << endl;
     }
-    trackz->Displayall();
 }
 
 int main()
