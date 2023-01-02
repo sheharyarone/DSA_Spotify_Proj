@@ -95,7 +95,7 @@ public:
         Node<T> *temp = head;
         while (temp != nullptr)
         {
-            cout << *(temp) << endl;
+            cout << *(temp->object) << endl;
             temp = temp->next;
         }
     }

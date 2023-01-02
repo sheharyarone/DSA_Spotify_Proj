@@ -80,7 +80,6 @@ void ShowSoloSongs(string artist, ArtistHashTable *table1)
     LinkedList_<Track> *line2 = InsertArtistSongs(artist, table1);
     // change into one func
     Artist *helperq = table1->ReturnArtistPointer(artist);
-    cout << helperq->name << endl;
     nodeCollab *edgeNode = helperq->CollabList->head;
     while (edgeNode != nullptr)
     {
@@ -93,33 +92,50 @@ void ShowSoloSongs(string artist, ArtistHashTable *table1)
         }
         edgeNode = edgeNode->next;
     }
-    Node<Track> *print = line2->head;
-    while (print != nullptr)
-    {
-        Track *song = print->object;
-        cout << *song << "|";
-        print = print->next;
-    }
+    cout << "SOLO SONGS ARE " << artist << " : " << endl;
+    line2->Displayall();
+    cout << endl;
 }
 
 void ShowCollaboratesongs(string artist, ArtistHashTable *table1)
 {
     int key = table1->hashFunction((artist));
     Artist *plzreply = table1->ReturnArtistPointer(artist);
-    cout << plzreply->CollabList->head->object->artist1->name << endl;
     nodeCollab *Dmzz = plzreply->CollabList->head;
-    cout << Dmzz->object->artist1->name << endl;
+    LinkedList_<Track> *collabSongs = new LinkedList_<Track>;
     while (Dmzz != nullptr)
     {
         Node<Track> *Iluvu = Dmzz->object->collabTracks->head;
         while (Iluvu != nullptr)
         {
-            Track *Uss = Iluvu->object;
-            cout << Uss->Title << "|";
+            collabSongs->ADD(Iluvu->object);
             Iluvu = Iluvu->next;
         }
         Dmzz = Dmzz->next;
     }
+    cout << "COLLAB SONGS OF " << artist << " : " << endl;
+    collabSongs->Displayall();
+    cout << endl;
+}
+
+void artistsGenres(string artistName, ArtistHashTable *table)
+{
+    Artist *temp = table->ReturnArtistPointer(artistName);
+    Node<Track> *temp1 = temp->SongsList->head;
+    LinkedList_<Genre> *genretypes = new LinkedList_<Genre>;
+    while (temp1 != nullptr)
+    {
+        Node<Genre> *temp2 = temp1->object->GenreOfTrack->head;
+        while (temp2 != nullptr)
+        {
+            genretypes->ADD(temp2->object);
+            temp2 = temp2->next;
+        }
+        temp1 = temp1->next;
+    }
+    cout << "GENRE ON WHICH " << artistName << " WORKED : " << endl;
+    genretypes->Displayall();
+    cout << endl;
 }
 
 int main()
@@ -156,6 +172,7 @@ int main()
     // }
     // ShowSoloSongs("ZAYN", ArtistContainer);
     // printArtistDetails(ArtistContainer);
-    ShowCollaboratesongs("ZAYN", ArtistContainer);
+    // ShowCollaboratesongs("ZAYN", ArtistContainer);
+    artistsGenres("ZAYN", ArtistContainer);
     return 0;
 }

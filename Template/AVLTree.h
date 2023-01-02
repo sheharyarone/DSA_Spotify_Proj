@@ -150,7 +150,7 @@ private:
             Node *left = node->left;
             Node *right = node->right;
             delete node;
-            
+
             if (!right)
             {
                 return left;
