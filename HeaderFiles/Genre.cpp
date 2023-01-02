@@ -34,6 +34,6 @@ bool Genre::operator<(Genre test)
 
 ostream &operator<<(ostream &os, const Genre obj)
 {
-    os << obj.name << endl;
+    os << obj.name;
     return os;
 }
