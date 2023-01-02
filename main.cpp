@@ -24,6 +24,84 @@ void printArtistDetails(ArtistHashTable *table)
     cout << endl;
 }
 
+LinkedList_<Track> *InsertArtistSongs(string artist, ArtistHashTable *table1)
+{
+
+    int location = table1->hashFunction((artist));
+    ArtistNode *helper = table1->hashTableArr[location]->headArtist;
+
+    while (helper != nullptr && helper->ArtistPointer->name != artist)
+    {
+        helper = helper->next;
+    }
+    LinkedList_<Track> *line1 = new LinkedList_<Track>;
+    Node<Track> *trackhelper = helper->ArtistPointer->SongsList->head;
+    while (trackhelper != nullptr)
+    {
+        Track *Tracker = trackhelper->object;
+        line1->ADD(Tracker);
+        trackhelper = trackhelper->next;
+    }
+    return line1;
+}
+void deleteCollabSong(LinkedList_<Track> *line2, Track *toDelete)
+{
+    Node<Track> *current = line2->head;
+    Node<Track> *prev = nullptr;
+
+    // Search for the value in the linked list
+    while (current != nullptr && current->object->Title != toDelete->Title)
+    {
+        prev = current;
+        current = current->next;
+    }
+
+    // If the value was not found, return without deleting anything
+    if (current == nullptr)
+        return;
+
+    // If the value is the first element in the list, update the head pointer
+    if (prev == nullptr)
+    {
+        line2->head = current->next;
+    }
+    // Otherwise, update the next pointer of the previous element to skip over the current element
+    else
+    {
+        prev->next = current->next;
+    }
+
+    // Free the memory for the current element
+    delete current;
+}
+
+void ShowSoloSongs(string artist, ArtistHashTable *table1)
+{
+    LinkedList_<Track> *line2 = InsertArtistSongs(artist, table1);
+    // change into one func
+    Artist *helperq = table1->ReturnArtistNode(artist);
+    cout << helperq->name << endl;
+    nodeCollab *edgeNode = helperq->CollabList->head;
+    while (edgeNode != nullptr)
+    {
+        Node<Track> *use = edgeNode->object->collabTracks->head;
+        while (use != nullptr)
+        {
+            Track *song = use->object;
+            deleteCollabSong(line2, song);
+            use = use->next;
+        }
+        edgeNode = edgeNode->next;
+    }
+    Node<Track> *print = line2->head;
+    while (print != nullptr)
+    {
+        Track *song = print->object;
+        cout << *song << "|";
+        print = print->next;
+    }
+}
+
 int main()
 {
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
@@ -43,19 +121,20 @@ int main()
 
     EdgesContainer->createGraph(TrackContainer);
     EdgesContainer->printEdges();
-    int key = ArtistContainer->hashFunction("ZAYN");
-    nodeCollab *linkedListEdgeTraver = ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->CollabList->head;
-    while (linkedListEdgeTraver != nullptr)
-    {
-        Edge *edge = linkedListEdgeTraver->object;
-        Node<Track> *collabTrackNodeInEdge = edge->collabTracks->head;
-        while (collabTrackNodeInEdge != nullptr)
-        {
-            cout << collabTrackNodeInEdge->object->Title << endl;
-            collabTrackNodeInEdge = collabTrackNodeInEdge->next;
-        }
-        linkedListEdgeTraver = linkedListEdgeTraver->next;
-    }
+    // int key = ArtistContainer->hashFunction("ZAYN");
+    // nodeCollab *linkedListEdgeTraver = ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->CollabList->head;
+    // while (linkedListEdgeTraver != nullptr)
+    // {
+    //     Edge *edge = linkedListEdgeTraver->object;
+    //     Node<Track> *collabTrackNodeInEdge = edge->collabTracks->head;
+    //     while (collabTrackNodeInEdge != nullptr)
+    //     {
+    //         cout << collabTrackNodeInEdge->object->Title << endl;
+    //         collabTrackNodeInEdge = collabTrackNodeInEdge->next;
+    //     }
+    //     linkedListEdgeTraver = linkedListEdgeTraver->next;
+    // }
+    ShowSoloSongs("ZAYN", ArtistContainer);
 
     return 0;
 }
