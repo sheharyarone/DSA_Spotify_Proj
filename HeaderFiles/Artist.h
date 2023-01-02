@@ -83,4 +83,9 @@ public:
     Artist(std::string);
     void trackHandler(Track *); // WILL BE CALLED BY ARTSITHASHTABLE FOR ADDING TRACK WHILE ITS CREATION
     bool operator==(Artist);
+    friend ostream &operator<<(ostream &out, const Artist &obj)
+    {
+        out << obj.name;
+        return out;
+    }
 };

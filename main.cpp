@@ -138,6 +138,27 @@ void artistsGenres(string artistName, ArtistHashTable *table)
     cout << endl;
 }
 
+void Coartist(string artist, ArtistHashTable *table1)
+{
+    LinkedList_<Artist> *ArtistStore = new LinkedList_<Artist>;
+    Artist *main = table1->ReturnArtistPointer(artist);
+    nodeCollab *edge = main->CollabList->head;
+    while (edge != nullptr)
+    {
+        Edge *edger = edge->object;
+        if (edger->artist1->name != artist)
+        {
+            ArtistStore->ADD(edger->artist1);
+        }
+        else
+        {
+            ArtistStore->ADD(edger->artist2);
+        }
+        edge = edge->next;
+    }
+    ArtistStore->Displayall();
+}
+
 int main()
 {
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
@@ -173,6 +194,7 @@ int main()
     // ShowSoloSongs("ZAYN", ArtistContainer);
     // printArtistDetails(ArtistContainer);
     // ShowCollaboratesongs("ZAYN", ArtistContainer);
-    artistsGenres("ZAYN", ArtistContainer);
+    // artistsGenres("ZAYN", ArtistContainer);
+    Coartist("ZAYN", ArtistContainer);
     return 0;
 }
