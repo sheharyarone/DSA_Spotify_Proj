@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "ArtistFunc.h"
 using namespace std;
 
 bool AreThereManyArtists(string s)

@@ -1,7 +1,3 @@
-//
-// Created by Ali on 22/12/2022.
-//
-
 #ifndef DSA_SPOTIFY_PROJ_LINKEDLIST_H
 #define DSA_SPOTIFY_PROJ_LINKEDLIST_H
 #include <iostream>
@@ -105,7 +101,7 @@ public:
         if (SearchItem(DeleteObject))
         {
 
-            if (*(DeleteObject) == *(head))
+            if (*(DeleteObject) == *(head->object))
             {
                 item = head;
                 head = head->next;
@@ -115,7 +111,7 @@ public:
             {
                 Node<T> *item = head;
                 Node<T> *previtem;
-                while (item != nullptr && (*(DeleteObject) != *(item)))
+                while (item != nullptr && (*(DeleteObject) != *(item->object)))
                 {
                     previtem = item;
                     item = item->next;
