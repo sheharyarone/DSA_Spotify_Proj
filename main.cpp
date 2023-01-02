@@ -11,7 +11,7 @@ void printArtistDetails(ArtistHashTable *table)
     cout << "Enter artist name: ";
     getline(cin, artistname);
     cout << endl;
-    Artist *temp = table->ReturnArtistNode(artistname);
+    Artist *temp = table->ReturnArtistPointer(artistname);
     Node<Track> *temp1 = temp->SongsList->head;
     cout << "Artist Name: " << artistname << endl
          << "Songs list:" << endl
@@ -79,7 +79,7 @@ void ShowSoloSongs(string artist, ArtistHashTable *table1)
 {
     LinkedList_<Track> *line2 = InsertArtistSongs(artist, table1);
     // change into one func
-    Artist *helperq = table1->ReturnArtistNode(artist);
+    Artist *helperq = table1->ReturnArtistPointer(artist);
     cout << helperq->name << endl;
     nodeCollab *edgeNode = helperq->CollabList->head;
     while (edgeNode != nullptr)
@@ -99,6 +99,26 @@ void ShowSoloSongs(string artist, ArtistHashTable *table1)
         Track *song = print->object;
         cout << *song << "|";
         print = print->next;
+    }
+}
+
+void ShowCollaboratesongs(string artist, ArtistHashTable *table1)
+{
+    int key = table1->hashFunction((artist));
+    Artist *plzreply = table1->ReturnArtistPointer(artist);
+    cout << plzreply->CollabList->head->object->artist1->name << endl;
+    nodeCollab *Dmzz = plzreply->CollabList->head;
+    cout << Dmzz->object->artist1->name << endl;
+    while (Dmzz != nullptr)
+    {
+        Node<Track> *Iluvu = Dmzz->object->collabTracks->head;
+        while (Iluvu != nullptr)
+        {
+            Track *Uss = Iluvu->object;
+            cout << Uss->Title << "|";
+            Iluvu = Iluvu->next;
+        }
+        Dmzz = Dmzz->next;
     }
 }
 
@@ -134,7 +154,8 @@ int main()
     //     }
     //     linkedListEdgeTraver = linkedListEdgeTraver->next;
     // }
-    ShowSoloSongs("ZAYN", ArtistContainer);
-
+    // ShowSoloSongs("ZAYN", ArtistContainer);
+    // printArtistDetails(ArtistContainer);
+    ShowCollaboratesongs("ZAYN", ArtistContainer);
     return 0;
 }

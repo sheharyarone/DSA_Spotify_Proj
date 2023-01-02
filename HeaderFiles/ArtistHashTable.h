@@ -37,7 +37,7 @@ public:
     Artist *GetArtistPointer(std::string name, Track *);
     
     //new function add by AON.
-    Artist* ReturnArtistNode(string);
+    Artist* ReturnArtistPointer(string);
     bool isAvailable(int ExistOn);
 
     int computePower(int value, int power);
