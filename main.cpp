@@ -159,6 +159,36 @@ void Coartist(string artist, ArtistHashTable *table1)
     ArtistStore->Displayall();
 }
 
+void CheckIfCoartist(string artist1, string artist2, ArtistHashTable *table1)
+{
+    bool yes = false;
+    LinkedList_<Track> *trackz = new LinkedList_<Track>;
+    Artist *main = table1->ReturnArtistPointer(artist1);
+    nodeCollab *edge = main->CollabList->head;
+    while (edge != nullptr)
+    {
+        Edge *edger = edge->object;
+        if (edger->artist1->name == artist2 || edger->artist2->name == artist2)
+        {
+            cout << "Yes they are Coartists!" << endl;
+            yes = true;
+            Node<Track> *trackx = edger->collabTracks->head;
+            while (trackx != nullptr)
+            {
+                Track *realtrack = trackx->object;
+                trackz->ADD(realtrack);
+                trackx = trackx->next;
+            }
+        }
+        edge = edge->next;
+    }
+    if (!yes)
+    {
+        cout << "No match!" << endl;
+    }
+    trackz->Displayall();
+}
+
 int main()
 {
     ArtistHashTable *ArtistContainer = new ArtistHashTable(53131);
@@ -195,6 +225,7 @@ int main()
     // printArtistDetails(ArtistContainer);
     // ShowCollaboratesongs("ZAYN", ArtistContainer);
     // artistsGenres("ZAYN", ArtistContainer);
-    Coartist("ZAYN", ArtistContainer);
+    // Coartist("ZAYN", ArtistContainer);
+    CheckIfCoartist("ZAYN", "Sia", ArtistContainer);
     return 0;
 }
