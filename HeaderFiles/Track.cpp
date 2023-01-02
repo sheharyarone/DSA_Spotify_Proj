@@ -87,3 +87,8 @@ bool Track::operator>(Track test)
 {
     return (this->Title > test.Title);
 }
+
+bool Track::operator!=(Track test_)
+{
+    return (this->Title != test_.Title);
+}

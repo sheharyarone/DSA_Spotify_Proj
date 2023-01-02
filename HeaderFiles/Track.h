@@ -31,11 +31,12 @@ public:
     int TimeSignature;
 
     Track();
-    Track(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer);
-    bool operator==(Track test);
+    Track(string *, ArtistHashTable *, AVLTree<Genre> *);
+    bool operator==(Track);
     void assigningArtistPointersToTrackClass(string, ArtistHashTable *, Track *);
-    bool operator<(Track test);
-    bool operator>(Track test);
+    bool operator<(Track);
+    bool operator>(Track);
+    bool operator!=(Track);
     
     friend ostream &operator<<(ostream &out, const Track &obj)
     {
