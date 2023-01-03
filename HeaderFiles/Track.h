@@ -31,13 +31,19 @@ public:
     int TimeSignature;
 
     Track();
+    // CONSTRUCOTR WILL ADD NECESSARY INT'S AND STRINGS TO MEMBERS OF TRACK
+    // ALSO IT WILL ADD GENRE AND ARTIST POINTERS INTO TRACK'S LINKED LIST
+    // ALSO IT WILL ADD THE TRACK'S POINTER TO THEIR OBJECTS
     Track(string *, ArtistHashTable *, AVLTree<Genre> *);
     bool operator==(Track);
+
+    // THIS FUNCTION WILL ADD TRACK TO ARTIST LIST
+    // WILL ADD ARTIST IN TO TRACK'S LINKEDLIST OF STORING ARTIST
     void assigningArtistPointersToTrackClass(string, ArtistHashTable *, Track *);
     bool operator<(Track);
     bool operator>(Track);
     bool operator!=(Track);
-    
+
     friend ostream &operator<<(ostream &out, const Track &obj)
     {
         out << obj.Title;

@@ -5,7 +5,8 @@
 #include "ArtistHashTable.h"
 using namespace std;
 
-
+int noOfArtist = 0;
+int noOfCollisionsInArtist = 0;
 ArtistNode::ArtistNode()
 {
     ArtistPointer = NULL;
@@ -150,13 +151,13 @@ Artist *ArtistHashTable::GetArtistPointer(string name, Track *trackPointerToAdd)
     int key = hashFunction(name);
     if (getHeadArtistName(key) == name)
     {
+        noOfArtist++;
         hashTableArr[key]->headArtist->ArtistPointer->trackHandler(trackPointerToAdd);
-        // cout << "ARTSIST MEI TRACK DAL GYA HY" << endl;
         return hashTableArr[key]->headArtist->ArtistPointer;
     }
     else
     {
-        // cout << "else case" << endl;
+        noOfCollisionsInArtist++;
         return hashTableArr[key]->GetArtistPointerFromList(name, trackPointerToAdd);
     }
 }
@@ -179,7 +180,7 @@ int ArtistHashTable::computePower(int value, int power)
 int ArtistHashTable::hashFunction(string s)
 {
     long long int sum = 0;
-    int value = 3;
+    int value = 7;
     for (int i = 0; i < s.length(); i++)
     {
         s[i] = tolower(s[i]);
@@ -211,12 +212,14 @@ void ArtistHashTable::handler(string *arr, int noOfArtists)
     }
 }
 
-//new function added by Aon. this will return artist node.
-Artist* ArtistHashTable::ReturnArtistPointer(string artistname){
-    int key=hashFunction(artistname);
-    ArtistNode* temp=hashTableArr[key]->headArtist;
-    while ((temp->ArtistPointer->name!=artistname) && temp!=nullptr){
-        temp=temp->next;
+// new function added by Aon. this will return artist node.
+Artist *ArtistHashTable::ReturnArtistPointer(string artistname)
+{
+    int key = hashFunction(artistname);
+    ArtistNode *temp = hashTableArr[key]->headArtist;
+    while ((temp->ArtistPointer->name != artistname) && temp != nullptr)
+    {
+        temp = temp->next;
     }
     return temp->ArtistPointer;
 }

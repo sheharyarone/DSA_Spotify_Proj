@@ -7,6 +7,9 @@
 
 using namespace std;
 
+int noOfUniqueSongs = 0;
+int noOfCollisionsInTracks = 0;
+
 TrackNode::TrackNode()
 {
     TrackPointer = NULL;
@@ -14,7 +17,7 @@ TrackNode::TrackNode()
 }
 TrackNode::TrackNode(string *array, ArtistHashTable *ArtistContainer, AVLTree<Genre> *GenreContainer)
 {
-    TrackPointer = new Track(array, ArtistContainer, GenreContainer); 
+    TrackPointer = new Track(array, ArtistContainer, GenreContainer);
     this->next = NULL;
 }
 LinkedList::LinkedList()
@@ -124,7 +127,11 @@ void LinkedList::deleteNode(string name)
         delete temp;
     }
 }
-
+TrackHashTable::TrackHashTable()
+{
+    tablesize = 0;
+    hashTableArr = nullptr;
+}
 TrackHashTable::TrackHashTable(int size = 50011)
 {
     tablesize = size;
@@ -182,10 +189,12 @@ void TrackHashTable::hashStore(string *arr, ArtistHashTable *ArtistContainer, AV
 
     if (isAvailable(key))
     {
+        noOfUniqueSongs++;
         hashTableArr[key] = new LinkedList(arr, ArtistContainer, GenreContainer);
     }
     else if (!(hashTableArr[key]->findInList(arr[1])))
     {
+        noOfCollisionsInTracks++;
         hashTableArr[key]->addTrackInList(arr, ArtistContainer, GenreContainer);
     }
     else

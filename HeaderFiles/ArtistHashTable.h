@@ -1,6 +1,9 @@
 #pragma once
 #include "Artist.cpp"
 
+// BELOW IS THE LINK LIST IMPLEMENTATION OF STORING LINK LIST
+// AT EACH HASHTABLE'S ARRAY KEY
+
 class ArtistNode
 {
 public:
@@ -20,6 +23,8 @@ public:
 
     void addArtistInList(std::string);
     bool findInList(std::string);
+
+    // BELOW FUNCTION WILL RETURN THE POINTER FORM LIST
     Artist *GetArtistPointerFromList(std::string, Track *);
     void displayAll();
     void deleteNode(std::string);
@@ -32,18 +37,24 @@ public:
     ArtistHashTable();
     ArtistHashTable(int);
     ~ArtistHashTable();
+    // THIS FUNCTION WILL GIVE THE ARTIST NAME BASED ON IT'S HASHING KEY
     std::string getHeadArtistName(int hashFunctionKey);
-    // GET ARTIST POINTER AND IT WILL BE THERE
+
+    // THIS FUNCTION WILL RETURN THE POINTER OF ARTIST AND
+    // WILL ADD THE TRACK WHICH WILL BE PASSED FROM TRACK CONSTRUCTOR
     Artist *GetArtistPointer(std::string name, Track *);
-    
-    //new function add by AON.
-    Artist* ReturnArtistPointer(string);
+
+    // THIS FUNCTION WILL RETURN THE ARTIST POINTER BY PASSING NAME
+    Artist *ReturnArtistPointer(string);
+    // THIS FUNCTION WILL CHECK WHETHER ARRAY KEY IS FREE OR NOT
     bool isAvailable(int ExistOn);
 
+    // BELOW TWO FUNCTIONS ARE FOR COMPUTING THE HASHING KEY
     int computePower(int value, int power);
-
     int hashFunction(std::string s);
-    void hashStore(std::string name);
 
+    // PARSER WILL CALL THIS FUNCTION BY SEPERATING THE ARTIST
+    // THROUGH SOME FUNCTIONS BASED ON SEMI COLON
     void handler(std::string *arr, int noOfArtists);
+    void hashStore(std::string name);
 };

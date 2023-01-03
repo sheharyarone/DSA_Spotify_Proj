@@ -1,7 +1,8 @@
+#pragma once
 #include "../Parser/Parser.cpp"
 #include "../HeaderFiles/Graph.cpp"
 
-// new function. prints all artists songs
+// THIS FUNCTION WILL PRINT OUT ALL THE ARTIST DETAILS WE HAVE IN IT'S OBJECT
 void printArtistDetails(string artist, ArtistHashTable *table)
 {
     Artist *temp = table->ReturnArtistPointer(artist);
@@ -17,11 +18,12 @@ void printArtistDetails(string artist, ArtistHashTable *table)
     cout << endl;
 }
 
+// THIS FUNCTION WILL PRINT OUT ALL THE SOLO TRACKS AN ARTSIT HAS WOKRED ON
 void ShowSoloTracks(string artist, ArtistHashTable *table1)
 {
     // change into one func
     Artist *helperq = table1->ReturnArtistPointer(artist);
-    LinkedList_<Track> * line2= helperq->SongsList;
+    LinkedList_<Track> *line2 = helperq->SongsList;
     nodeCollab *edgeNode = helperq->CollabList->head;
     while (edgeNode != nullptr)
     {
@@ -34,11 +36,11 @@ void ShowSoloTracks(string artist, ArtistHashTable *table1)
         }
         edgeNode = edgeNode->next;
     }
-    cout << "SOLO SONGS ARE " << artist << " : " << endl;
+    cout << "SOLO SONGS OF " << artist << " : " << endl;
     line2->Displayall();
     cout << endl;
 }
-
+// THIS FUNCTION WILL PRINT OUT ALL THE COLLABORATIVE SONGS AN ARTIST HAS WORKED ON
 void ShowCollaboratesongs(string artist, ArtistHashTable *table1)
 {
     int key = table1->hashFunction((artist));
@@ -59,7 +61,7 @@ void ShowCollaboratesongs(string artist, ArtistHashTable *table1)
     collabSongs->Displayall();
     cout << endl;
 }
-
+// THIS WILL PRINT OUT ALL THE GENRE'S AN ARTIST HAS WORKED ON
 void artistsGenres(string artistName, ArtistHashTable *table)
 {
     Artist *temp = table->ReturnArtistPointer(artistName);
@@ -79,7 +81,8 @@ void artistsGenres(string artistName, ArtistHashTable *table)
     genretypes->Displayall();
     cout << endl;
 }
-
+// THIS FUNCTION WILL PRINT OUT ALL THE ARTIST
+// WITH WHOM AN ARTIST HAS WORKED ON
 void Coartist(string artist, ArtistHashTable *table1)
 {
     LinkedList_<Artist> *ArtistStore = new LinkedList_<Artist>;
@@ -100,7 +103,9 @@ void Coartist(string artist, ArtistHashTable *table1)
     }
     ArtistStore->Displayall();
 }
-
+// THIS FUNCTION WILL PRINT OUT WHETHER ARTIST HAS WORKED TOGETHER OR NOT
+// IF YES THEN IT WILL PRINT OUT THE TRACKS THEY COLLABORATED NO
+// IF NO THEN THERE WILL BE ONE STATEMENT ONLY "NO COLLABORATION !"
 void CheckIfCoartist(string artist1, string artist2, ArtistHashTable *table1)
 {
     LinkedList_<Track> *trackz = new LinkedList_<Track>;
@@ -126,28 +131,33 @@ void CheckIfCoartist(string artist1, string artist2, ArtistHashTable *table1)
     }
     if (trackz->head == nullptr)
     {
-        cout << "No match!" << endl;
+        cout << "NO COLLABORATION !" << endl;
     }
 }
-
-void mostEnergeticSongOfGenre(string genre, AVLTree<Genre>* tree){
-    Genre* found=tree->Search(genre);
-    Node<Track>* tracklist=found->GenreTrackList->head->next;
-    Node<Track>* mostEnergeticSongOfGenre=found->GenreTrackList->head;
-    while(tracklist!=nullptr){
-        if ((tracklist->object->Energy)>(mostEnergeticSongOfGenre->object->Energy)){
-            mostEnergeticSongOfGenre=tracklist;
+// THIS WILL PRINT OUT THE TRACK HAVING HIGHEST VALUE IN ONE GENRE
+// WHICH IS BEING PASSED INTO THIS FUNCTION
+void mostEnergeticSongOfGenre(string genre, AVLTree<Genre> *tree)
+{
+    Genre *found = tree->Search(genre);
+    Node<Track> *tracklist = found->GenreTrackList->head->next;
+    Node<Track> *mostEnergeticSongOfGenre = found->GenreTrackList->head;
+    while (tracklist != nullptr)
+    {
+        if ((tracklist->object->Energy) > (mostEnergeticSongOfGenre->object->Energy))
+        {
+            mostEnergeticSongOfGenre = tracklist;
         }
-        tracklist=tracklist->next;
+        tracklist = tracklist->next;
     }
-    Node<Artist>* artistlist=mostEnergeticSongOfGenre->object->ArtistsOfTrack->head;
-    cout<<"Genre: "<<found->name<<endl
-    <<"Most energetic song: "<<mostEnergeticSongOfGenre->object->Title<<endl
-    <<"Artist(s): ";
-    while(artistlist!=nullptr){
-        cout<<artistlist->object->name<<"\t";
-        artistlist=artistlist->next;
+    Node<Artist> *artistlist = mostEnergeticSongOfGenre->object->ArtistsOfTrack->head;
+    cout << "Genre: " << found->name << endl
+         << "Most energetic song: " << mostEnergeticSongOfGenre->object->Title << endl
+         << "Artist(s): ";
+    while (artistlist != nullptr)
+    {
+        cout << artistlist->object->name << "\t";
+        artistlist = artistlist->next;
     }
-    cout<<endl
-    <<"Energy level: "<<mostEnergeticSongOfGenre->object->Energy<<endl;
+    cout << endl
+         << "Energy level: " << mostEnergeticSongOfGenre->object->Energy << endl;
 }
