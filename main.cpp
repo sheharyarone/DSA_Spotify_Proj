@@ -27,13 +27,22 @@ int main()
 
     EdgesContainer->createGraph(TrackContainer);
     EdgesContainer->printNoOfEdges();
-    // ShowSoloTracks("ZAYN", ArtistContainer);
+    cout<<"Function 1"<<endl;
     printArtistDetails("ZAYN", ArtistContainer);
-    // printArtistDetails(ArtistContainer);
-    // ShowCollaboratesongs("ZAYN", ArtistContainer);
-    // artistsGenres("ZAYN", ArtistContainer);
-    // Coartist("ZAYN", ArtistContainer);
-    // CheckIfCoartist("ZAYN", "Sia", ArtistContainer);
-    // mostEnergeticSongOfGenre("sleep",GenreContainer);
+    cout<<"Function 2"<<endl;
+    ShowSoloTracks("ZAYN", ArtistContainer);
+    cout<<"Function 3"<<endl;
+    ShowCollaboratesongs("ZAYN", ArtistContainer);
+    cout<<"Function 4"<<endl;
+    artistsGenres("ZAYN", ArtistContainer);
+    cout<<"Function 5"<<endl;
+    Coartist("ZAYN", ArtistContainer);
+    cout<<"Function 6"<<endl;
+    CheckIfCoartist("ZAYN", "Sia", ArtistContainer);
+    cout<<"Function 7"<<endl;
+    mostEnergeticSongOfGenre("sleep",GenreContainer);
+    cout<<"Function 8"<<endl;
+    averageTrackLengthforGenre("acoustic",GenreContainer);
+
     return 0;
 }

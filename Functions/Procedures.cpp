@@ -154,3 +154,19 @@ void mostEnergeticSongOfGenre(string genre, AVLTree<Genre> *GenreContainer)
     cout << endl
          << "Energy level: " << mostEnergeticSongOfGenre->object->Energy << endl;
 }
+
+
+//THIS FUNCTION WILL PRINT OUT THE AVERAGE LENGTH OF SONGS OF A GENRE
+//WHICH IS PASSED INTO THIS FUNCION
+void averageTrackLengthforGenre(string genre,AVLTree<Genre>* tree){
+    Node<Track>* tracklist=tree->Search(genre)->GenreTrackList->head;
+    int count=0;
+    int totallength=0;
+    while (tracklist!=nullptr){
+        count++;
+        totallength+=tracklist->object->Duration;
+        tracklist=tracklist->next;
+    }
+    int avglength=(totallength/count);
+    cout<<"Average duration of "<<genre<<" tracks is "<<avglength<<"."<<endl;
+}
