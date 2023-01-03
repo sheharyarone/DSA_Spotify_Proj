@@ -168,5 +168,5 @@ void averageTrackLengthforGenre(string genre,AVLTree<Genre>* tree){
         tracklist=tracklist->next;
     }
     int avglength=(totallength/count);
-    cout<<"Average duration of "<<genre<<" tracks is "<<avglength<<"."<<endl;
+    cout<<"Average duration of "<<genre<<" tracks is "<<avglength<<" ms."<<endl;
 }

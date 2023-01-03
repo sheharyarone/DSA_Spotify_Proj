@@ -27,22 +27,24 @@ int main()
 
     EdgesContainer->createGraph(TrackContainer);
     EdgesContainer->printNoOfEdges();
-    cout<<"Function 1"<<endl;
+    cout << "PRINTING ZAYN ARTIST DETAILS :" << endl;
     printArtistDetails("ZAYN", ArtistContainer);
-    cout<<"Function 2"<<endl;
+    cout << "PRINTING SOLO TRACKS OF ZAYN :" << endl;
     ShowSoloTracks("ZAYN", ArtistContainer);
-    cout<<"Function 3"<<endl;
+    cout << "PRINTING COLLABORATIVE SONGS OF ZAYN :" << endl;
     ShowCollaboratesongs("ZAYN", ArtistContainer);
-    cout<<"Function 4"<<endl;
+    cout << "PRINTING GENRE'S ON WHICH ZAYN WORKED :" << endl;
     artistsGenres("ZAYN", ArtistContainer);
-    cout<<"Function 5"<<endl;
+    cout << "COARTISTS OF ZAYN : " << endl;
     Coartist("ZAYN", ArtistContainer);
-    cout<<"Function 6"<<endl;
+    cout << "ARE ZAYN AND SIA COARTIST" << endl;
     CheckIfCoartist("ZAYN", "Sia", ArtistContainer);
-    cout<<"Function 7"<<endl;
-    mostEnergeticSongOfGenre("sleep",GenreContainer);
-    cout<<"Function 8"<<endl;
-    averageTrackLengthforGenre("acoustic",GenreContainer);
+    cout << "ARE ZAYN AND ANDREW FOY COARTIST" << endl;
+    CheckIfCoartist("ZAYN", "Andrew Foy", ArtistContainer);
+    cout << "MOST ENERGETIC SONGS OF SLEEP :" << endl;
+    mostEnergeticSongOfGenre("sleep", GenreContainer);
+    cout << "AVERAGE TRACK LENGTH OF ACOUSTIC GENRE : " << endl;
+    averageTrackLengthforGenre("acoustic", GenreContainer);
 
     return 0;
 }
