@@ -18,16 +18,17 @@ int main()
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer, GenreContainer);
     cout << "TRACKS HASHTABLE SET" << endl;
 
-    cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
-    cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
+    // cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
+    // cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
 
-    cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
-    cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
+    // cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
+    // cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
     EdgeLinkedList *EdgesContainer = new EdgeLinkedList();
 
     EdgesContainer->createGraph(TrackContainer);
     EdgesContainer->printNoOfEdges();
-    ShowSoloTracks("ZAYN", ArtistContainer);
+    // ShowSoloTracks("ZAYN", ArtistContainer);
+    printArtistDetails("ZAYN", ArtistContainer);
     // printArtistDetails(ArtistContainer);
     // ShowCollaboratesongs("ZAYN", ArtistContainer);
     // artistsGenres("ZAYN", ArtistContainer);
