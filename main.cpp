@@ -18,29 +18,22 @@ int main()
     parseCSV("DataSet/dataset.csv", ArtistContainer, TrackContainer, GenreContainer);
     cout << "TRACKS HASHTABLE SET" << endl;
 
+    // cout << "NO OF Unique Artists WERE : " << noOfArtist << endl;
+    // cout << "No of Collisions in Artist were : " << noOfCollisionsInArtist << endl;
+
+    // cout << "NO OF UNIQUE SONGS : " << noOfUniqueSongs << endl;
+    // cout << "NO oF Collisions in TRACKS were : " << noOfCollisionsInTracks << endl;
     EdgeLinkedList *EdgesContainer = new EdgeLinkedList();
 
     EdgesContainer->createGraph(TrackContainer);
-    EdgesContainer->printEdges();
-    // int key = ArtistContainer->hashFunction("ZAYN");
-    // nodeCollab *linkedListEdgeTraver = ArtistContainer->hashTableArr[key]->headArtist->ArtistPointer->CollabList->head;
-    // while (linkedListEdgeTraver != nullptr)
-    // {
-    //     Edge *edge = linkedListEdgeTraver->object;
-    //     Node<Track> *collabTrackNodeInEdge = edge->collabTracks->head;
-    //     while (collabTrackNodeInEdge != nullptr)
-    //     {
-    //         cout << collabTrackNodeInEdge->object->Title << endl;
-    //         collabTrackNodeInEdge = collabTrackNodeInEdge->next;
-    //     }
-    //     linkedListEdgeTraver = linkedListEdgeTraver->next;
-    // }
-    ShowSoloTracks("ZAYN", ArtistContainer);
+    EdgesContainer->printNoOfEdges();
+    // ShowSoloTracks("ZAYN", ArtistContainer);
+    printArtistDetails("ZAYN", ArtistContainer);
     // printArtistDetails(ArtistContainer);
-    //ShowCollaboratesongs("ZAYN", ArtistContainer);
+    // ShowCollaboratesongs("ZAYN", ArtistContainer);
     // artistsGenres("ZAYN", ArtistContainer);
     // Coartist("ZAYN", ArtistContainer);
-    //CheckIfCoartist("ZAYN", "Sia", ArtistContainer);
-    //mostEnergeticSongOfGenre("sleep",GenreContainer);
+    // CheckIfCoartist("ZAYN", "Sia", ArtistContainer);
+    // mostEnergeticSongOfGenre("sleep",GenreContainer);
     return 0;
 }

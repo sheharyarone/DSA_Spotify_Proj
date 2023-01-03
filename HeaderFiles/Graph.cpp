@@ -108,7 +108,7 @@ void EdgeLinkedList::createGraph(TrackHashTable *h1)
     }
 }
 
-void EdgeLinkedList::printEdges()
+void EdgeLinkedList::printNoOfEdges()
 {
     cout << "NO OF EDGES ARE : " << noOfEdges << endl;
 }

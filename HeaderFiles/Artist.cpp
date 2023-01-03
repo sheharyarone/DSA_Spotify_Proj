@@ -25,3 +25,26 @@ bool Artist::operator==(Artist test)
 {
     return (this->name == test.name);
 }
+nodeCollab::nodeCollab(Edge *val)
+{
+    object = val;
+    next = nullptr;
+}
+CollabLinkedList::CollabLinkedList()
+{
+    head = nullptr;
+}
+bool CollabLinkedList::isempty()
+{
+    return head == nullptr;
+}
+void CollabLinkedList::Displayall()
+{
+    nodeCollab *temp = head;
+    while (temp != nullptr)
+    {
+        cout << temp->object << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}

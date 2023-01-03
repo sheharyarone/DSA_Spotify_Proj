@@ -3,20 +3,19 @@
 #include <iostream>
 // FORWARD DECLARATION
 using namespace std;
+// FORWARD DECLARATION BECAUSE THIS FILE IS THE TOP MOST
 class Edge;
 class Track;
 class TrackHashTable;
 
+// BELOW IS THE LINK LIST IMPLEMENTAION FOR
+// STORING GRAPH EDGE
 class nodeCollab
 {
 public:
     Edge *object;
     nodeCollab *next;
-    explicit nodeCollab(Edge *val)
-    {
-        object = val;
-        next = nullptr;
-    }
+    explicit nodeCollab(Edge *val);
 };
 
 class CollabLinkedList
@@ -24,28 +23,9 @@ class CollabLinkedList
 public:
     nodeCollab *head;
 
-    CollabLinkedList()
-    {
-        head = nullptr;
-    }
+    CollabLinkedList();
 
-    bool isempty() const
-    {
-        return head == nullptr;
-    }
-
-    int length() const
-    {
-        nodeCollab *temp = head;
-        int n = 0;
-
-        while (temp != nullptr)
-        {
-            n++;
-            temp = temp->next;
-        }
-        return n;
-    }
+    bool isempty();
 
     void ADD(Edge *val)
     {
@@ -60,16 +40,7 @@ public:
             head = newnode;
         }
     }
-    void printll() const
-    {
-        nodeCollab *temp = head;
-        while (temp != nullptr)
-        {
-            cout << temp->object << " ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
+    void Displayall();
 };
 
 class Artist
@@ -81,11 +52,14 @@ public:
     // FROM NXT NODE WE WILL SEE ALL THE TRACKS
     Artist();
     Artist(std::string);
-    void trackHandler(Track *); // WILL BE CALLED BY ARTSITHASHTABLE FOR ADDING TRACK WHILE ITS CREATION
+
     bool operator==(Artist);
     friend ostream &operator<<(ostream &out, const Artist &obj)
     {
         out << obj.name;
         return out;
     }
+    // THIS FUNCTION WILL BE CALLED BY ARTISTHASHTABLE
+    // FOR ADDING TRACK IN IT'S ARTIST OBJECT
+    void trackHandler(Track *);
 };
